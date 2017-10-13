@@ -1,3 +1,4 @@
+import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;
 import io.netty.channel.Channel;
 
@@ -10,11 +11,15 @@ public class Server {
     public static Table mainTable;
     public static List<Player> playerQueue;
 
+    protected GameEngine gameEngigne;
+
     public Server()
     {
         this.mainTable = new Table();
         this.playerQueue = new ArrayList<>();
+        this.gameEngigne = new GameEngine();
     }
+
 
     public static void main(String[] args) throws Exception {
 
@@ -22,6 +27,8 @@ public class Server {
 
         DiscardServer handlerThread =  new DiscardServer(4444);
         handlerThread.start();
+
+        ServerMain.gameEngigne.run();
 
     }
 
@@ -37,6 +44,38 @@ public class Server {
             }
         }
      return count;
+    }
+
+    public static void writeMessageForAllPlayer(String message)
+    {
+        byte[] bytes = message.getBytes();
+
+        Team tableTeams[] = Server.mainTable.getTeams();
+
+        for (int i = 0; i < tableTeams[0].getPlayers().length; i += 1)
+        {
+            ByteBuf buffer = Unpooled.wrappedBuffer(bytes);
+
+            if (tableTeams[0].getPlayers()[i] != null)
+                tableTeams[0].getPlayers()[i].getChannel().writeAndFlush(buffer);
+        }
+
+        for (int i = 0; i < tableTeams[1].getPlayers().length; i += 1)
+        {
+            ByteBuf buffer = Unpooled.wrappedBuffer(bytes);
+
+            if (tableTeams[1].getPlayers()[i] != null)
+                tableTeams[1].getPlayers()[i].getChannel().writeAndFlush(buffer);
+        }
+
+        for (int i = 0; i < Server.playerQueue.size(); i += 1)
+        {
+            ByteBuf buffer = Unpooled.wrappedBuffer(bytes);
+
+            Player tempPlayer = Server.playerQueue.get(i);
+            tempPlayer.getChannel().writeAndFlush(buffer);
+        }
+
     }
 
     public static void writeMessage(Channel client, String message)

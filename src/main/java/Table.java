@@ -13,6 +13,7 @@ public class Table
         this.teams[0] = new Team();
         this.teams[1] = new Team();
         this.midDeck = new Card[4];
+        this.state = GameState.Wait;
     }
 
     public CardFamily getAtout() {

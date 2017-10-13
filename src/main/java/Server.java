@@ -71,6 +71,8 @@ public class Server {
                 System.out.println("Player : [" + teamOne.getPlayers()[i].getName() +
                         "] on :" + teamOne.getPlayers()[i].getChannel().remoteAddress());
             }
+            else
+                System.out.println("Player : No");
         }
 
         System.out.println("TeamTwo :::");
@@ -81,6 +83,8 @@ public class Server {
                 System.out.println("Player : [" + teamTwo.getPlayers()[i].getName() +
                         "] on :" + teamTwo.getPlayers()[i].getChannel().remoteAddress());
             }
+            else
+                System.out.println("Player : No");
         }
 
 

@@ -33,7 +33,7 @@ public class Team
 
     public boolean removePlayer(io.netty.channel.Channel channelPlayer)
     {
-        for (int i = 0; i < Server.countArray(this.Players); i += 1)
+        for (int i = 0; i < this.Players.length; i += 1)
         {
             if (this.Players[i] != null
                     && this.Players[i].getChannel().remoteAddress() == channelPlayer.remoteAddress())

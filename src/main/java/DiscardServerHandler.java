@@ -54,14 +54,14 @@ public class DiscardServerHandler extends ChannelInboundHandlerAdapter { // (1)
                 manageNewPlayer(subPlayerFromQueue.getChannel());
                 Server.playerQueue.remove(0);
             }
-
+            System.out.println("Client : " + ctx.channel().remoteAddress() + " has left !");
         } else {
             int qeueIndex = Server.getQueueIndex(ctx.channel());
             if (qeueIndex != -1)
                 Server.playerQueue.remove(qeueIndex);
         }
 
-        System.out.println("Client : " + ctx.channel().remoteAddress() + " has left !");
+
 
         Server.showTablePlayers();
     }

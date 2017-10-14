@@ -10,6 +10,8 @@ import io.netty.util.ReferenceCountUtil;
 
 import java.io.UnsupportedEncodingException;
 
+import static sun.swing.MenuItemLayoutHelper.max;
+
 /**
  * Handles a server-side channel.
  */
@@ -24,7 +26,7 @@ public class DiscardServerHandler extends ChannelInboundHandlerAdapter { // (1)
 
     public void manageNewPlayer(Channel ctx)
     {
-        Player newPlayer = new Player(Tools.randomString(20), ctx);
+        Player newPlayer = new Player(Tools.randomPlayerName(), ctx);
 
         int countPlayerTeamOne = Server.countArray(Server.mainTable.getTeams()[0].getPlayers());
         int countPlayerTeamTwo = Server.countArray(Server.mainTable.getTeams()[1].getPlayers());
@@ -39,7 +41,9 @@ public class DiscardServerHandler extends ChannelInboundHandlerAdapter { // (1)
         {
             Server.writeMessage(ctx, "Server & Queue Full");
             ctx.close();
+            return;
         }
+        Server.writeMessage(ctx, "[Server] Welcome " + newPlayer.getName() + "\n");
     }
 
     @Override
@@ -108,7 +112,43 @@ public class DiscardServerHandler extends ChannelInboundHandlerAdapter { // (1)
                                 break;
                             case 3: /* case of betting on color Form : <family> <amount> */
 
+                                /* check de la famille de la carte choisie */
+                                CardFamily cardFamily = CardFamily.getCardFamilyFromString(command[1]);
+                                if (cardFamily == null)
+                                {
+                                    Server.writeMessage(channel, "[Bet] Bad family arg\n");
+                                    break;
+                                }
+
+                                /* Check du format du montant de paris */
+                                int amount = Tools.tryParse(command[2]);
+                                if (amount == -1 || amount % 10 != 0 || amount < 80 || amount > 160)
+                                {
+                                    Server.writeMessage(channel, "[Bet] Bad amount arg\n");
+                                    break;
+                                }
+
+                                /* check que le bet proposé est plus grand que celui des deux team */
+                                int currentTeamOneBet = Server.mainTable.getTeams()[0].getBet();
+                                int currentTeamTwoBet = Server.mainTable.getTeams()[1].getBet();
+                                int currentBestBet = max(currentTeamOneBet, currentTeamTwoBet);
+                                if (amount <= currentBestBet)
+                                {
+                                    Server.writeMessage(channel, "[Bet] amount have to be biggest than current best Bet (" + currentBestBet + ")\n");
+                                    break;
+                                }
+
+                                /* Push du nouveau hight bet */
+                                Server.mainTable.getTeamOfPlayer(channel).setBet(amount);
+                                Server.mainTable.getTeamOfPlayer(channel).setBetFamily(cardFamily);
+
+                                Server.writeMessageForAllPlayer("[" + Server.getPlayerByChannel(channel).getName() + "] New hight bet : " + amount + "\n");
+
+                                /* passage au joueur suivant */
+                                Server.gameEngigne.GoNextPlayerTurn();
+
                                 break;
+
                             default:
                                 Server.writeMessage(channel, "[Bet] Bad argument\n");
                                 break;

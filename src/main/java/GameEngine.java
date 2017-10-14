@@ -103,10 +103,18 @@ public class GameEngine extends Thread
 
     }
 
+    public void GoNextPlayerTurn()
+    {
+        if (this.playerTurn == 3)
+            this.playerTurn = 0;
+        else
+            this.playerTurn += 1;
+    }
+
     public boolean isThePlayerCanPlay(Channel player)
     {
         if (this.getPlayerMapPostion(player) == this.playerTurn)
-            return  false;
+            return true;
         else
             return false;
     }
@@ -128,9 +136,9 @@ public class GameEngine extends Thread
         if (Server.mainTable.getTeams()[0].getPlayers()[0].getChannel().remoteAddress() == playerSock)
             return 0;
         else if (Server.mainTable.getTeams()[0].getPlayers()[1].getChannel().remoteAddress() == playerSock)
-            return 1;
-        else if (Server.mainTable.getTeams()[1].getPlayers()[0].getChannel().remoteAddress() == playerSock)
             return 2;
+        else if (Server.mainTable.getTeams()[1].getPlayers()[0].getChannel().remoteAddress() == playerSock)
+            return 1;
         else if (Server.mainTable.getTeams()[1].getPlayers()[1].getChannel().remoteAddress() == playerSock)
             return 3;
         else

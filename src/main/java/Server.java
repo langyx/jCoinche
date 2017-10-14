@@ -85,7 +85,7 @@ public class Server {
     public static void writeMessage(Channel client, String message)
     {
         byte[] bytes = message.getBytes();
-        System.out.println(client.writeAndFlush(Unpooled.wrappedBuffer(bytes)));
+        client.writeAndFlush(Unpooled.wrappedBuffer(bytes));
     }
 
     public static int getQueueIndex(Channel channel)

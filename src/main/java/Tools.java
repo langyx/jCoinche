@@ -20,11 +20,27 @@ public class Tools {
         return saltStr;
     }
 
+    public static String randomPlayerName()
+    {
+        String newName = "player";
+        newName += Tools.randomInt(0, 20000);
+        return newName;
+    }
+
     public static int randomInt(int min, int max)
     {
         Random rand = new Random();
 
         return rand.nextInt(max) + min;
     }
+
+    public static Integer tryParse(String text) {
+        try {
+            return Integer.parseInt(text);
+        } catch (NumberFormatException e) {
+            return -1;
+        }
+    }
+
 
 }

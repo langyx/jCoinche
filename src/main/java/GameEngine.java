@@ -40,6 +40,16 @@ public class GameEngine extends Thread
 
     }
 
+    private boolean initDeckPlayerWithMainDeck(Player player)
+    {
+        for (int i = 0; i < player.getDeck().length; i +=  1)
+        {
+            if (player.addCard(Server.mainTable.PickRandomCardInMainDeck()) == false)
+                return false;
+        }
+        return  true;
+    }
+
     protected void gamingCore() throws InterruptedException {
         while (!this.isTheGamePlayable())
         {
@@ -51,15 +61,54 @@ public class GameEngine extends Thread
             Cas ou on commence le pli ou viens de lancer le server
             On passe en état de paris (BET)
          */
-        if (Server.mainTable.getState() == GameState.Init || Server.mainTable.getState() == GameState.Bet)
+
+        switch (Server.mainTable.getState())
         {
-            Server.mainTable.setState(GameState.Bet);
+            case Init: //Distribution des cards aux players
 
+                boolean distribState = true;
 
+                if (!initDeckPlayerWithMainDeck(Server.mainTable.getTeams()[0].getPlayers()[0])) distribState = false;
+                if (!initDeckPlayerWithMainDeck(Server.mainTable.getTeams()[0].getPlayers()[1])) distribState = false;
+                if (!initDeckPlayerWithMainDeck(Server.mainTable.getTeams()[1].getPlayers()[0])) distribState = false;
+                if (!initDeckPlayerWithMainDeck(Server.mainTable.getTeams()[1].getPlayers()[1])) distribState = false;
+
+                String distribStateMessage = "a";
+                if (distribState == false)
+                     distribStateMessage = "[Server] Cards distribution failed !\n";
+                else
+                    distribStateMessage = "[Server] Cards distribution done !\n";
+
+                System.out.println(distribStateMessage);
+                Server.writeMessageForAllPlayer(distribStateMessage);
+
+                if (distribState)
+                     Server.mainTable.setState(GameState.Bet);
+                break;
+
+            case Bet:
+                break;
+
+            case Waitting:
+                break;
+
+            case Pli:
+                break;
+
+            default:
+                break;
         }
 
-        System.out.println("Game is runnig");
+        //System.out.println("Game is runnig");
 
+    }
+
+    public boolean isThePlayerCanPlay(Channel player)
+    {
+        if (this.getPlayerMapPostion(player) == this.playerTurn)
+            return  false;
+        else
+            return false;
     }
 
     public boolean isTheGamePlayable()

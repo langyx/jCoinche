@@ -5,6 +5,7 @@ public class Team
     private Player Players[];
     private int    score;
     private int    bet;
+    private CardFamily betFamily;
     private int    coinche;
     private int    gameScore;
 
@@ -16,6 +17,14 @@ public class Team
        this.gameScore = 0;
        this.Players = new Player[2];
 
+    }
+
+    public CardFamily getBetFamily() {
+        return betFamily;
+    }
+
+    public void setBetFamily(CardFamily betFamily) {
+        this.betFamily = betFamily;
     }
 
     public Player[] getPlayers() {

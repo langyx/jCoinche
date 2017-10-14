@@ -63,8 +63,6 @@ public class DiscardServerHandler extends ChannelInboundHandlerAdapter { // (1)
                 Server.playerQueue.remove(qeueIndex);
         }
 
-
-
         Server.showTablePlayers();
     }
 
@@ -73,13 +71,54 @@ public class DiscardServerHandler extends ChannelInboundHandlerAdapter { // (1)
     {
         String[] command = message.split(" ");
        // System.out.println("=" + command[0] + "=");
-        switch (command[0])
+        switch (command[0].toLowerCase())
         {
-            case "name": case "NAME":
+            case "name":
                 if (command.length == 2)
                     Server.getPlayerByChannel(channel).setName(command[1]);
                 else
                     Server.writeMessage(channel, "[Server] Command Bad Arguments\n");
+                break;
+
+            case "bet" :
+                if (Server.mainTable.getState() == GameState.Bet && Server.getGameEngigne().isTheGamePlayable())
+                {
+                    if (Server.getGameEngigne().isThePlayerCanPlay(channel))
+                    {
+                        switch (command.length)
+                        {
+                            case 2: /* case of simple action */
+                                switch (command[1].toLowerCase())
+                                {
+                                    case "coinche":
+
+                                        break;
+
+                                    case "surcoinche":
+
+                                        break;
+
+                                    case "passe":
+
+                                        break;
+
+                                    default:
+                                        break;
+                                }
+                                break;
+                            case 3: /* case of betting on color Form : <family> <amount> */
+
+                                break;
+                            default:
+                                Server.writeMessage(channel, "[Bet] Bad argument\n");
+                                break;
+                        }
+                    }
+                    else
+                        Server.writeMessage(channel, "[Bet] Is not you turn\n");
+                }
+                else
+                    Server.writeMessage(channel, "[Server] Is no the bet round !\n");
                 break;
 
             default:

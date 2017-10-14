@@ -11,7 +11,7 @@ public class Server {
     public static Table mainTable;
     public static List<Player> playerQueue;
 
-    protected GameEngine gameEngigne;
+    protected static GameEngine gameEngigne;
 
     public Server()
     {
@@ -29,10 +29,9 @@ public class Server {
         handlerThread.start();
 
         ServerMain.gameEngigne.run();
-
     }
 
-    public GameEngine getGameEngigne() {
+    public static GameEngine getGameEngigne() {
         return gameEngigne;
     }
 

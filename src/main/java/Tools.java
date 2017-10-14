@@ -19,4 +19,12 @@ public class Tools {
         String saltStr = salt.toString();
         return saltStr;
     }
+
+    public static int randomInt(int min, int max)
+    {
+        Random rand = new Random();
+
+        return rand.nextInt(max) + min;
+    }
+
 }

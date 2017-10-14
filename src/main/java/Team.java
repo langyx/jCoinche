@@ -6,7 +6,7 @@ public class Team
     private int    score;
     private int    bet;
     private CardFamily betFamily;
-    private int    coinche;
+    private int    coinche; // 0 disable // 2 coinched // 3 surcoinched
     private int    gameScore;
 
     public Team()
@@ -21,6 +21,11 @@ public class Team
 
     public CardFamily getBetFamily() {
         return betFamily;
+    }
+
+    public boolean isCoinched()
+    {
+        return (this.coinche > 0);
     }
 
     public void setBetFamily(CardFamily betFamily) {

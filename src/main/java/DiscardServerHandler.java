@@ -1,7 +1,5 @@
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.ByteBufUtil;
-import io.netty.buffer.EmptyByteBuf;
-import io.netty.buffer.Unpooled;
 import io.netty.channel.Channel;
 import io.netty.channel.ChannelFutureListener;
 import io.netty.channel.ChannelHandlerContext;
@@ -9,6 +7,7 @@ import io.netty.channel.ChannelInboundHandlerAdapter;
 import io.netty.util.ReferenceCountUtil;
 
 import java.io.UnsupportedEncodingException;
+import java.net.SocketAddress;
 
 import static sun.swing.MenuItemLayoutHelper.max;
 
@@ -24,7 +23,7 @@ public class DiscardServerHandler extends ChannelInboundHandlerAdapter { // (1)
         Server.showTablePlayers();
     }
 
-    public void manageNewPlayer(Channel ctx)
+    private void manageNewPlayer(Channel ctx)
     {
         Player newPlayer = new Player(Tools.randomPlayerName(), ctx);
 
@@ -75,8 +74,10 @@ public class DiscardServerHandler extends ChannelInboundHandlerAdapter { // (1)
     {
         String[] command = message.split(" ");
         Player currPlayer = Server.getPlayerByChannel(channel);
+        Team playerTeam = Server.mainTable.getTeamOfPlayer(currPlayer.getChannel());
 
-       // System.out.println("=" + command[0] + "=");
+
+        // System.out.println("=" + command[0] + "=");
         switch (command[0].toLowerCase())
         {
             case "name":
@@ -97,23 +98,98 @@ public class DiscardServerHandler extends ChannelInboundHandlerAdapter { // (1)
                                 switch (command[1].toLowerCase())
                                 {
                                     case "coinche":
+                                        if (playerTeam.isCoinched())
+                                        {
+                                            Server.writeMessage(channel, "[Bet] You're coinched : Passe Or Surcoinche\n");
+                                            break;
+                                        }
+                                        int currentTeamOneBet = Server.mainTable.getTeams()[0].getBet();
+                                        int currentTeamTwoBet = Server.mainTable.getTeams()[1].getBet();
+                                        int currentBestBet = max(currentTeamOneBet, currentTeamTwoBet);
+                                        Team bestBetTeam = null;
 
+                                        /* On vérifie qu'une des team à bet */
+                                        if (currentBestBet == 0)
+                                        {
+                                            Server.writeMessage(channel, "[Bet] No bet to coinche\n");
+                                            break;
+                                        }
+
+                                        if (currentBestBet == currentTeamOneBet)
+                                            bestBetTeam = Server.mainTable.getTeams()[0];
+                                        else
+                                            bestBetTeam = Server.mainTable.getTeams()[1];
+
+                                        /* On vérifie que le meilleur paris ne soit pas l'équipe du joueur voulant coincher */
+                                        SocketAddress playerAdress = currPlayer.getChannel().remoteAddress();
+                                        if (playerAdress == bestBetTeam.getPlayers()[0].getChannel().remoteAddress()
+                                                || playerAdress == bestBetTeam.getPlayers()[1].getChannel().remoteAddress())
+                                        {
+                                            Server.writeMessage(channel, "[Bet] No bet to coinche (You team are highest Bet)\n");
+                                            break;
+                                        }
+
+                                        bestBetTeam.setCoinche(2);
+                                        Server.gameEngigne.GoBackPlayerTurn();
+
+                                        Player lastPlayer = Server.gameEngigne.getPlayerByMapPosition(Server.gameEngigne.getPlayerTurn());
+                                        Server.writeMessageForAllPlayer("[Bet] [" + currPlayer.getName() + "] Coinche\n");
+                                        Server.writeMessageForAllPlayer("[Bet] " + lastPlayer.getName() + " have to answer (Surcoinche or Passe) !\n");
                                         break;
 
                                     case "surcoinche":
+                                       if (playerTeam.getCoinche() <= 0)
+                                        {
+                                            Server.writeMessage(channel, "[Bet] You can't surcoinche because nobody coinche you\n");
+                                            break;
+                                        }
+
+                                        playerTeam.setCoinche(3);
+
+                                        Server.gameEngigne.setTableCycle(0);
+                                        Server.gameEngigne.setPlayerTurn(0);
+                                        Server.mainTable.setState(GameState.BetTraitement);
 
                                         break;
 
                                     case "passe":
+
                                         Server.writeMessageForAllPlayer("[Bet] [" + currPlayer.getName() + "] Passe\n");
                                         Server.gameEngigne.GoNextPlayerTurn();
+
+                                        /* Redistribution des cartes dans le cas ou tous les joueurs ont passé pendant le tour de bet sans aucune bet placée */
+                                        if (Server.gameEngigne.getPlayerTurn() == 0 && Server.gameEngigne.getBestBet() <= 0)
+                                        {
+                                            Server.mainTable.initMainDeck();
+                                            if (Server.gameEngigne.DistributeCardsForPlayers())
+                                                Server.gameEngigne.setTableCycle(0);
+
+                                        }
+                                        /* Passage au jeu (pli) dans le cas ou le dernier passe alors qu'une bet plus élevé que celui de sa team est placée */
+                                        else if (Server.gameEngigne.getPlayerTurn() == 0 && Server.gameEngigne.getBestBet() > playerTeam.getBet())
+                                        {
+                                            Server.mainTable.setState(GameState.BetTraitement);
+                                        }
+                                        /* Si le joueur Passe alors que sa Team est coinché (il ne surcoinche pas) */
+                                        else if (playerTeam.isCoinched())
+                                        {
+                                            Server.mainTable.setState(GameState.BetTraitement);
+                                        }
                                         break;
 
                                     default:
+                                        Server.writeMessage(channel, "[Bet] Bad argument\n");
                                         break;
                                 }
                                 break;
                             case 3: /* case of betting on color Form : <family> <amount> */
+
+                                /* Si le player est coinché il ne peut pas remiser */
+                                if (playerTeam.isCoinched())
+                                {
+                                    Server.writeMessage(channel, "[Bet] You're coinched : Passe Or Surcoinche\n");
+                                    break;
+                                }
 
                                 /* check de la famille de la carte choisie */
                                 CardFamily cardFamily = CardFamily.getCardFamilyFromString(command[1]);

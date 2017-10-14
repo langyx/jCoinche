@@ -3,6 +3,8 @@ import jdk.nashorn.internal.runtime.regexp.joni.exception.InternalException;
 
 import java.net.SocketAddress;
 
+import static sun.swing.MenuItemLayoutHelper.max;
+
 
 /*
 
@@ -44,6 +46,7 @@ public class GameEngine extends Thread
     {
         for (int i = 0; i < player.getDeck().length; i +=  1)
         {
+            player.getDeck()[i] = null;
             if (player.addCard(Server.mainTable.PickRandomCardInMainDeck()) == false)
                 return false;
         }
@@ -66,27 +69,18 @@ public class GameEngine extends Thread
         {
             case Init: //Distribution des cards aux players
 
-                boolean distribState = true;
-
-                if (!initDeckPlayerWithMainDeck(Server.mainTable.getTeams()[0].getPlayers()[0])) distribState = false;
-                if (!initDeckPlayerWithMainDeck(Server.mainTable.getTeams()[0].getPlayers()[1])) distribState = false;
-                if (!initDeckPlayerWithMainDeck(Server.mainTable.getTeams()[1].getPlayers()[0])) distribState = false;
-                if (!initDeckPlayerWithMainDeck(Server.mainTable.getTeams()[1].getPlayers()[1])) distribState = false;
-
-                String distribStateMessage = "a";
-                if (distribState == false)
-                     distribStateMessage = "[Server] Cards distribution failed !\n";
-                else
-                    distribStateMessage = "[Server] Cards distribution done !\n";
-
-                System.out.println(distribStateMessage);
-                Server.writeMessageForAllPlayer(distribStateMessage);
+                boolean distribState = this.DistributeCardsForPlayers();
 
                 if (distribState)
                      Server.mainTable.setState(GameState.Bet);
                 break;
 
             case Bet:
+                if (this.tableCycle >= 3)
+                    Server.mainTable.setState(GameState.Waitting);
+                break;
+
+            case BetTraitement:
                 break;
 
             case Waitting:
@@ -103,12 +97,51 @@ public class GameEngine extends Thread
 
     }
 
+    public int getBestBet()
+    {
+        int currentTeamOneBet = Server.mainTable.getTeams()[0].getBet();
+        int currentTeamTwoBet = Server.mainTable.getTeams()[1].getBet();
+        int currentBestBet = max(currentTeamOneBet, currentTeamTwoBet);
+        return currentBestBet;
+    }
+
+    public boolean DistributeCardsForPlayers()
+    {
+        boolean distribState = true;
+
+        if (!initDeckPlayerWithMainDeck(Server.mainTable.getTeams()[0].getPlayers()[0])) distribState = false;
+        if (!initDeckPlayerWithMainDeck(Server.mainTable.getTeams()[0].getPlayers()[1])) distribState = false;
+        if (!initDeckPlayerWithMainDeck(Server.mainTable.getTeams()[1].getPlayers()[0])) distribState = false;
+        if (!initDeckPlayerWithMainDeck(Server.mainTable.getTeams()[1].getPlayers()[1])) distribState = false;
+
+        String distribStateMessage = "a";
+        if (distribState == false)
+            distribStateMessage = "[Server] Cards distribution failed !\n";
+        else
+            distribStateMessage = "[Server] Cards distribution done !\n";
+
+        System.out.println(distribStateMessage);
+        Server.writeMessageForAllPlayer(distribStateMessage);
+        return distribState;
+    }
+
     public void GoNextPlayerTurn()
     {
         if (this.playerTurn == 3)
+        {
             this.playerTurn = 0;
+            this.tableCycle += 1;
+        }
         else
             this.playerTurn += 1;
+    }
+
+    public void GoBackPlayerTurn()
+    {
+        if (this.playerTurn == 0)
+            this.playerTurn = 3;
+        else
+            this.playerTurn -= 1;
     }
 
     public boolean isThePlayerCanPlay(Channel player)
@@ -143,5 +176,39 @@ public class GameEngine extends Thread
             return 3;
         else
             return -1;
+    }
+
+    public Player getPlayerByMapPosition(int mapPos)
+    {
+        switch (mapPos)
+        {
+            case 0:
+                return Server.mainTable.getTeams()[0].getPlayers()[0];
+            case 1:
+                return Server.mainTable.getTeams()[1].getPlayers()[0];
+            case 2:
+                return Server.mainTable.getTeams()[0].getPlayers()[1];
+            case 3:
+                return Server.mainTable.getTeams()[1].getPlayers()[1];
+            default:
+                return null;
+
+        }
+    }
+
+    public int getPlayerTurn() {
+        return playerTurn;
+    }
+
+    public int getTableCycle() {
+        return tableCycle;
+    }
+
+    public void setPlayerTurn(int playerTurn) {
+        this.playerTurn = playerTurn;
+    }
+
+    public void setTableCycle(int tableCycle) {
+        this.tableCycle = tableCycle;
     }
 }

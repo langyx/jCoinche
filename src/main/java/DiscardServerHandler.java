@@ -74,6 +74,8 @@ public class DiscardServerHandler extends ChannelInboundHandlerAdapter { // (1)
     public void manageCommand(Channel channel, String message)
     {
         String[] command = message.split(" ");
+        Player currPlayer = Server.getPlayerByChannel(channel);
+
        // System.out.println("=" + command[0] + "=");
         switch (command[0].toLowerCase())
         {
@@ -103,7 +105,8 @@ public class DiscardServerHandler extends ChannelInboundHandlerAdapter { // (1)
                                         break;
 
                                     case "passe":
-
+                                        Server.writeMessageForAllPlayer("[Bet] [" + currPlayer.getName() + "] Passe\n");
+                                        Server.gameEngigne.GoNextPlayerTurn();
                                         break;
 
                                     default:
@@ -142,7 +145,7 @@ public class DiscardServerHandler extends ChannelInboundHandlerAdapter { // (1)
                                 Server.mainTable.getTeamOfPlayer(channel).setBet(amount);
                                 Server.mainTable.getTeamOfPlayer(channel).setBetFamily(cardFamily);
 
-                                Server.writeMessageForAllPlayer("[" + Server.getPlayerByChannel(channel).getName() + "] New hight bet : " + amount + "\n");
+                                Server.writeMessageForAllPlayer("[Bet] [" + currPlayer.getName() + "] New hight bet : " + amount + "\n");
 
                                 /* passage au joueur suivant */
                                 Server.gameEngigne.GoNextPlayerTurn();

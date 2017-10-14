@@ -8,6 +8,8 @@ import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
 import io.netty.util.ReferenceCountUtil;
 
+import java.io.UnsupportedEncodingException;
+
 /**
  * Handles a server-side channel.
  */
@@ -67,20 +69,39 @@ public class DiscardServerHandler extends ChannelInboundHandlerAdapter { // (1)
     }
 
 
+    public void manageCommand(Channel channel, String message)
+    {
+        String[] command = message.split(" ");
+       // System.out.println("=" + command[0] + "=");
+        switch (command[0])
+        {
+            case "name": case "NAME":
+                if (command.length == 2)
+                    Server.getPlayerByChannel(channel).setName(command[1]);
+                else
+                    Server.writeMessage(channel, "[Server] Command Bad Arguments\n");
+                break;
+
+            default:
+                Server.writeMessage(channel, "[Server] Command Unkown\n");
+                break;
+        }
+    }
+
     @Override
     public void channelRead(ChannelHandlerContext ctx, Object msg) { // (2)
          ByteBuf in = (ByteBuf) msg;
-        try {
-            while (in.isReadable()) { // (1)
-                System.out.print((char) in.readByte());
-                System.out.flush();
-            }
-        } finally {
-            ReferenceCountUtil.release(msg); // (2)
-        }
-      /*  String mess = "dddd\n";
-        byte[] bittt = mess.getBytes();
-        System.out.println(ctx.channel().writeAndFlush(Unpooled.wrappedBuffer(bittt)));*/
+         byte[] msg_rcv =  ByteBufUtil.getBytes(in);
+
+         try {
+             String msg_txt = new String(msg_rcv, "UTF-8");
+             this.manageCommand(ctx.channel(), msg_txt.replace("\n", ""));
+         }catch (UnsupportedEncodingException e) {
+             e.printStackTrace();
+         }
+
+        ReferenceCountUtil.release(msg);
+
     }
 
     @Override

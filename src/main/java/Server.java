@@ -32,6 +32,11 @@ public class Server {
 
     }
 
+    public GameEngine getGameEngigne() {
+        return gameEngigne;
+    }
+
+
     public static int countArray(Object[] data)
     {
         int count = 0;
@@ -95,6 +100,36 @@ public class Server {
             }
         }
         return -1;
+    }
+
+    public static Player getPlayerByChannel(Channel channel)
+    {
+        Team teamOne = Server.mainTable.getTeams()[0];
+        Team teamTwo = Server.mainTable.getTeams()[1];
+
+
+        for (int i = 0; i < teamOne.getPlayers().length; i += 1)
+        {
+            if (teamOne.getPlayers()[i] != null
+                    && teamOne.getPlayers()[i].getChannel().remoteAddress() == channel.remoteAddress())
+                return teamOne.getPlayers()[i];
+        }
+
+        for (int i = 0; i < teamTwo.getPlayers().length; i += 1)
+        {
+            if (teamTwo.getPlayers()[i] != null
+                    && teamTwo.getPlayers()[i].getChannel().remoteAddress() == channel.remoteAddress())
+                return teamTwo.getPlayers()[i];
+        }
+
+        for (int i = 0; i < Server.playerQueue.size(); i += 1)
+        {
+            Player waitingPlayer = Server.playerQueue.get(i);
+            if (waitingPlayer.getChannel().remoteAddress() == channel.remoteAddress())
+                return waitingPlayer;
+        }
+
+        return null;
     }
 
     public static void showTablePlayers()

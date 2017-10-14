@@ -1,5 +1,6 @@
 public enum GameState{
-    Wait,
+    Init,
+    Waitting,
     Bet,
-    Play
+    Pli
 }

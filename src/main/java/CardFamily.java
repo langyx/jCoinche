@@ -23,4 +23,9 @@ public enum CardFamily{
         }
         return null;
     }
+
+    @Override
+    public String toString() {
+        return super.toString();
+    }
 }

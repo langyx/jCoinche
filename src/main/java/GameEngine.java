@@ -76,11 +76,21 @@ public class GameEngine extends Thread
                 break;
 
             case Bet:
-                if (this.tableCycle >= 3)
-                    Server.mainTable.setState(GameState.Waitting);
+                /* All manage in ServerHandler */
                 break;
 
             case BetTraitement:
+                Team attackingTeam = this.getBestBetTeam(false);
+                Team defenseTeam = this.getBestBetTeam(true);
+
+                defenseTeam.setBet(0);
+                defenseTeam.setCoinche(0);
+
+                Server.mainTable.setAtout(attackingTeam.getBetFamily());
+
+                Server.writeMessageForAllPlayer("[Server] Start Game ! Atout is [" + attackingTeam.getBetFamily().toString() + "]\n");
+
+                Server.mainTable.setState(GameState.Pli);
                 break;
 
             case Waitting:
@@ -103,6 +113,15 @@ public class GameEngine extends Thread
         int currentTeamTwoBet = Server.mainTable.getTeams()[1].getBet();
         int currentBestBet = max(currentTeamOneBet, currentTeamTwoBet);
         return currentBestBet;
+    }
+
+    public Team getBestBetTeam(boolean inversed)
+    {
+        if (this.getBestBet() == Server.mainTable.getTeams()[0].getBet())
+            return inversed ? Server.mainTable.getTeams()[1] :  Server.mainTable.getTeams()[0];
+        else
+            return inversed ? Server.mainTable.getTeams()[0] :  Server.mainTable.getTeams()[1];
+
     }
 
     public boolean DistributeCardsForPlayers()

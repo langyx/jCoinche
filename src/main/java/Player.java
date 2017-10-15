@@ -47,4 +47,23 @@ public class Player
         }
         return false;
     }
+
+    public String getFormatedDeck()
+    {
+        String playerDeck = "[Hand]";
+
+        if (Server.countArray(this.deck) == 0)
+            return "[Hand] No Card\n";
+        for (int i = 0; i < this.deck.length; i += 1)
+        {
+            if (this.deck[i] != null)
+            {
+                playerDeck += "[" + this.deck[i].getFamilyCard().toString() + "-" + this.deck[i].getFamilyName() + "]";
+                if (i < this.deck.length)
+                    playerDeck += " ";
+            }
+        }
+        playerDeck += "\n";
+        return playerDeck;
+    }
 }

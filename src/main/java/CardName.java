@@ -6,5 +6,10 @@ public enum CardName{
     Dix,
     Valet,
     Dame,
-    Roi
+    Roi;
+
+    @Override
+    public String toString() {
+        return super.toString();
+    }
 }

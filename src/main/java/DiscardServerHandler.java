@@ -87,6 +87,14 @@ public class DiscardServerHandler extends ChannelInboundHandlerAdapter { // (1)
                     Server.writeMessage(channel, "[Server] Command Bad Arguments\n");
                 break;
 
+            case "hand":
+                Server.writeMessage(channel, currPlayer.getFormatedDeck());
+                break;
+
+            case "table":
+                Server.writeMessage(channel, Server.mainTable.getFormattedMidDeck());
+                break;
+
             case "bet" :
                 if (Server.mainTable.getState() == GameState.Bet && Server.getGameEngigne().isTheGamePlayable())
                 {

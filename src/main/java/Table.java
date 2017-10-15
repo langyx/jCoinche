@@ -66,6 +66,25 @@ public class Table
             return null;
     }
 
+    public String getFormattedMidDeck()
+    {
+        String playerDeck = "[Table]";
+
+        if (Server.countArray(this.midDeck) == 0)
+            return "[Table] No Card\n";
+        for (int i = 0; i < this.midDeck.length; i += 1)
+        {
+            if (this.midDeck[i] != null)
+            {
+                playerDeck += "[" + this.midDeck[i].getFamilyCard().toString() + "-" + this.midDeck[i].getFamilyName() + "]";
+                if (i < this.midDeck.length)
+                    playerDeck += " ";
+            }
+        }
+        playerDeck += "\n";
+        return playerDeck;
+    }
+
     public Card[] getMainDeck() {
         return mainDeck;
     }

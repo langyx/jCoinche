@@ -50,12 +50,8 @@ public class DiscardServer extends Thread {
 
             System.out.println("Server is now Waiting for client");
 
-            // Bind and start to accept incoming connections.
-            ChannelFuture f = b.bind(port).sync(); // (7)
+           ChannelFuture f = b.bind(port).sync(); // (7)
 
-            // Wait until the server socket is closed.
-            // In this example, this does not happen, but you can do that to gracefully
-            // shut down your server.
             f.channel().closeFuture().sync();
         } finally {
             workerGroup.shutdownGracefully();

@@ -60,11 +60,6 @@ public class GameEngine extends Thread
             sleep(1000);
         }
 
-        /*
-            Cas ou on commence le pli ou viens de lancer le server
-            On passe en état de paris (BET)
-         */
-
         switch (Server.mainTable.getState())
         {
             case Init: //Distribution des cards aux players
@@ -77,6 +72,10 @@ public class GameEngine extends Thread
 
             case Bet:
                 /* All manage in ServerHandler */
+
+                /* Si les paris s'éternise sur plus de 3 tours */
+                if (this.getTableCycle() == 3)
+                    Server.mainTable.setState(GameState.BetTraitement);
                 break;
 
             case BetTraitement:

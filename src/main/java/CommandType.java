@@ -3,5 +3,7 @@ public enum CommandType{
     Auction,
     Card,
     Hand,
-    Table
+    Table,
+    Info,
+    Other
 }

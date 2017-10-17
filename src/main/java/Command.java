@@ -1,12 +1,12 @@
 public class Command
 {
     private CommandType type;
-    private String[] args;
+    private String[] data;
 
     public Command(CommandType _type, String[] _args)
     {
         this.type = _type;
-        this.args = _args;
+        this.data = _args;
     }
 
     public CommandType getType() {
@@ -18,10 +18,10 @@ public class Command
     }
 
     public String[] getArgs() {
-        return args;
+        return data;
     }
 
     public void setArgs(String[] args) {
-        this.args = args;
+        this.data = args;
     }
 }

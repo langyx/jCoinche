@@ -259,12 +259,9 @@ public class DiscardServerHandler extends ChannelInboundHandlerAdapter { // (1)
          ByteBuf in = (ByteBuf) msg;
          byte[] msg_rcv =  ByteBufUtil.getBytes(in);
 
-         try {
-             String msg_txt = new String(msg_rcv, "UTF-8");
-             this.manageCommand(ctx.channel(), msg_txt.replace("\n", ""));
-         }catch (UnsupportedEncodingException e) {
-             e.printStackTrace();
-         }
+         String msg_txt = Serializer.deserialize(msg_rcv);
+        this.manageCommand(ctx.channel(), msg_txt.replace("\n", ""));
+
 
         ReferenceCountUtil.release(msg);
 

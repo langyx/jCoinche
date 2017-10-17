@@ -1,8 +1,11 @@
+import com.google.gson.Gson;
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;
 import io.netty.channel.Channel;
+import org.apache.commons.lang3.SerializationUtils;
 
 import java.lang.reflect.Array;
+import java.util.Base64;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -35,6 +38,7 @@ public class Server {
         ServerMain.gameEngigne.start();
 
         ServerMain.gameGraphic.start();
+
     }
 
     public static GameEngine getGameEngigne() {
@@ -58,40 +62,33 @@ public class Server {
 
     public static void writeMessageForAllPlayer(String message)
     {
-        byte[] bytes = message.getBytes();
+        byte[] bytes = Serializer.serialize(message, CommandType.Info);
 
         Team tableTeams[] = Server.mainTable.getTeams();
 
         for (int i = 0; i < tableTeams[0].getPlayers().length; i += 1)
         {
-            ByteBuf buffer = Unpooled.wrappedBuffer(bytes);
-
             if (tableTeams[0].getPlayers()[i] != null)
-                tableTeams[0].getPlayers()[i].getChannel().writeAndFlush(buffer);
+                tableTeams[0].getPlayers()[i].getChannel().writeAndFlush(Unpooled.wrappedBuffer(bytes));
         }
 
         for (int i = 0; i < tableTeams[1].getPlayers().length; i += 1)
         {
-            ByteBuf buffer = Unpooled.wrappedBuffer(bytes);
-
             if (tableTeams[1].getPlayers()[i] != null)
-                tableTeams[1].getPlayers()[i].getChannel().writeAndFlush(buffer);
+                tableTeams[1].getPlayers()[i].getChannel().writeAndFlush(Unpooled.wrappedBuffer(bytes));
         }
 
         for (int i = 0; i < Server.playerQueue.size(); i += 1)
         {
-            ByteBuf buffer = Unpooled.wrappedBuffer(bytes);
-
             Player tempPlayer = Server.playerQueue.get(i);
-            tempPlayer.getChannel().writeAndFlush(buffer);
+            tempPlayer.getChannel().writeAndFlush(Unpooled.wrappedBuffer(bytes));
         }
 
     }
 
     public static void writeMessage(Channel client, String message)
     {
-        byte[] bytes = message.getBytes();
-        client.writeAndFlush(Unpooled.wrappedBuffer(bytes));
+       client.writeAndFlush(Unpooled.wrappedBuffer(Serializer.serialize(message, CommandType.Info)));
     }
 
     public static int getQueueIndex(Channel channel)

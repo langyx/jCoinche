@@ -13,11 +13,15 @@ public class Server {
 
     protected static GameEngine gameEngigne;
 
+    public static GameGraphic gameGraphic;
+
     public Server()
     {
         this.mainTable = new Table();
         this.playerQueue = new ArrayList<>();
         this.gameEngigne = new GameEngine();
+        this.gameGraphic = new GameGraphic();
+
     }
 
 
@@ -28,7 +32,9 @@ public class Server {
         DiscardServer handlerThread =  new DiscardServer(4444);
         handlerThread.start();
 
-        ServerMain.gameEngigne.run();
+        ServerMain.gameEngigne.start();
+
+        ServerMain.gameGraphic.start();
     }
 
     public static GameEngine getGameEngigne() {

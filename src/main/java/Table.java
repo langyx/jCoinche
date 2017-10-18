@@ -10,6 +10,7 @@ public class Table
     private Card winningCard;
     private Team winningCardTeam;
     private GameState state;
+    private CardFamily firstCard;
 
     public Table()
     {
@@ -140,4 +141,100 @@ public class Table
     public void setState(GameState state) {
         this.state = state;
     }
+
+
+    public CardFamily getFirstCardFamily() {
+        return firstCard;
+
+    }
+
+
+
+    public void setFirstCardFamily(CardFamily firstCard) {
+        this.firstCard = firstCard;
+
+    }
+
+
+
+
+
+    public void PushCardOnMid(Card card, int index)
+
+    {
+        this.midDeck[index] = card;
+
+    }
+
+
+
+
+
+    public String checkValueAtout(String first, String second)
+
+    {
+        if (first.equalsIgnoreCase("valet") || first.equalsIgnoreCase("neuf") && (!second.equalsIgnoreCase("valet")) ||
+                (first.equalsIgnoreCase("as") && (!second.equalsIgnoreCase("neuf")) && (!second.equalsIgnoreCase("valet"))) ||
+                (first.equalsIgnoreCase("dix") && (!second.equalsIgnoreCase("as")) && (!second.equalsIgnoreCase("neuf")) && (!second.equalsIgnoreCase("valet"))) ||
+                (first.equalsIgnoreCase("roi") && (!second.equalsIgnoreCase("dix")) && (!second.equalsIgnoreCase("as")) && (!second.equalsIgnoreCase("neuf")) && (!second.equalsIgnoreCase("valet"))) ||
+                (first.equalsIgnoreCase("dame") && (!second.equalsIgnoreCase("roi")) && (!second.equalsIgnoreCase("dix")) && (!second.equalsIgnoreCase("as")) && (!second.equalsIgnoreCase("neuf")) && (!second.equalsIgnoreCase("valet"))) ||
+                ((first.equalsIgnoreCase("sept") || first.equalsIgnoreCase("huit")) && (!second.equalsIgnoreCase("dame")) && (!second.equalsIgnoreCase("roi")) && (!second.equalsIgnoreCase("dix")) && (!second.equalsIgnoreCase("as")) && (!second.equalsIgnoreCase("neuf")) && (!second.equalsIgnoreCase("valet"))))
+        {
+            return first;
+        }
+        else
+        {
+            return second;
+        }
+
+    }
+
+
+
+    public String checkValueNonAtout(String first, String second)
+
+    {
+        if (first.equalsIgnoreCase("as") || first.equalsIgnoreCase("dix") && (!second.equalsIgnoreCase("as")) ||
+                (first.equalsIgnoreCase("roi") && (!second.equalsIgnoreCase("dix")) && (!second.equalsIgnoreCase("as"))) ||
+                (first.equalsIgnoreCase("dame") && (!second.equalsIgnoreCase("roi")) && (!second.equalsIgnoreCase("dix")) && (!second.equalsIgnoreCase("as"))) ||
+                (first.equalsIgnoreCase("valet") && (!second.equalsIgnoreCase("dame")) && (!second.equalsIgnoreCase("roi")) && (!second.equalsIgnoreCase("dix")) && (!second.equalsIgnoreCase("as"))) ||
+                (first.equalsIgnoreCase("dame") && (!second.equalsIgnoreCase("roi")) && (!second.equalsIgnoreCase("dix")) && (!second.equalsIgnoreCase("as")) && (!second.equalsIgnoreCase("neuf")) && (!second.equalsIgnoreCase("valet"))) ||
+                ((first.equalsIgnoreCase("sept") || first.equalsIgnoreCase("huit") || first.equalsIgnoreCase("neuf")) && (!second.equalsIgnoreCase("valet")) && (!second.equalsIgnoreCase("dame")) && (!second.equalsIgnoreCase("roi")) && (!second.equalsIgnoreCase("dix")) && (!second.equalsIgnoreCase("as"))))
+        {
+            return first;
+        }
+        else
+        {
+            return second;
+        }
+
+    }
+
+
+
+    public boolean checkMid()
+
+    {
+        if (this.midDeck[0] == null)
+        {
+            return true;
+        }
+        else {
+            System.out.println(this.midDeck[0].toString());
+            return false;
+        }
+
+    }
+
+    public void initMidDeck()
+
+    {
+        for (int i = 0; i < this.midDeck.length; i  += 1)
+        {
+            this.midDeck[i] = null;
+        }
+
+    }
+
+
 }

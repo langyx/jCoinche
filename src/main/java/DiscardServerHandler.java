@@ -248,6 +248,151 @@ public class DiscardServerHandler extends ChannelInboundHandlerAdapter { // (1)
                     Server.writeMessage(channel, "[Server] Is no the bet round !\n");
                 break;
 
+            case "drop":
+
+                //game.getPlayerMapPostion(channel);
+
+                if (Server.getGameEngigne().isTheGamePlayable() && Server.mainTable.getState() == GameState.Pli) {
+
+                    if (Server.getGameEngigne().isThePlayerCanPlay(channel)) {
+
+                        if (!((command.length == 3) && ((command[1].equalsIgnoreCase(CardName.AS.toString())) ||
+                                command[1].equalsIgnoreCase(CardName.Sept.toString()) ||
+                                command[1].equalsIgnoreCase(CardName.Huit.toString()) ||
+                                command[1].equalsIgnoreCase(CardName.Neuf.toString()) ||
+                                command[1].equalsIgnoreCase(CardName.Dix.toString()) ||
+                                command[1].equalsIgnoreCase(CardName.Valet.toString()) ||
+                                command[1].equalsIgnoreCase(CardName.Dame.toString()) ||
+                                command[1].equalsIgnoreCase(CardName.Roi.toString())) &&
+                                (command[2].equalsIgnoreCase(CardFamily.Coeur.toString()) ||
+                                        command[2].equalsIgnoreCase(CardFamily.Pique.toString()) ||
+                                        command[2].equalsIgnoreCase(CardFamily.Trefle.toString()) ||
+                                        command[2].equalsIgnoreCase(CardFamily.Carreau.toString())))) {
+
+                            //System.out.print("command1 == "   command[1]   "command 2 === "   command[2]);
+
+                            Server.writeMessage(channel, "[Server] Please enter drop   Cardname   CardFamily\n");
+
+                        } else {
+
+                            //String prout = Server.getPlayerByChannel(channel).getFormatedDeck();
+
+                            //System.out.println("AVANTTTTTTTTT"   prout)
+
+                            if (Server.mainTable.getMidDeck()[0] == null) {
+                                if (Server.getPlayerByChannel(channel).searchOnDeck(command[1], command[2])) {
+                                    Server.getPlayerByChannel(channel).removeOnDeck(command[1], command[2]);
+                                    Server.writeMessage(channel, "[Server] Card Dropped\n");
+                                    Server.mainTable.setFirstCardFamily(CardFamily.getCardFamilyFromString(command[2]));
+                                    Server.mainTable.setWinningCard(Server.mainTable.getMidDeck()[0]); // CHECK LA MEILLEUR DES ATOUT ET LA DONNER A WINNINGCARD
+                                    Server.gameEngigne.GoNextPlayerTurn();
+                                    // PLAYER OBLIGE DE METTRE LE MEME TYPE QUE LA CARTE DU MILIEU
+                                } else {
+                                    System.out.println("You don't have this card or already used, try again !");
+                                }
+
+                            } else {
+                                // si il a trouvé la carte dans le deck
+                                if (Server.getPlayerByChannel(channel).searchOnDeck(command[1], command[2])) {
+                                    // Check si la carte que on veut poser est égale à la famille de la premiere
+                                    if (Server.mainTable.getFirstCardFamily().toString().equalsIgnoreCase(command[2])) {
+                                        //Check si la first card et celle qu'on veut poser sont de la famille de l'atout
+                                        if (Server.mainTable.getFirstCardFamily().toString().equalsIgnoreCase(Server.mainTable.getAtout().toString())) {
+                                            //si famille de Atout condition de check de valeur
+                                            Server.getPlayerByChannel(channel).removeOnDeck(command[1], command[2]);
+                                            Server.writeMessage(channel, "[Server] Card Dropped\n");
+                                            if (Server.gameEngigne.getPlayerTurn() < 4) {
+                                                //Server.mainTable.setWinningCard();
+                                                if (Server.mainTable.checkValueAtout(Server.mainTable.getWinningCard().getFamilyName().toString(), Server.mainTable.getMidDeck()[Server.gameEngigne.getPlayerTurn()].getFamilyName().toString()) == Server.mainTable.getMidDeck()[Server.gameEngigne.getPlayerTurn()].getFamilyName().toString())
+                                                    Server.mainTable.setWinningCard(Server.mainTable.getMidDeck()[Server.gameEngigne.getPlayerTurn()]);
+                                            }
+                                            if (Server.gameEngigne.getPlayerTurn() == 3) {
+                                                Server.writeMessage(channel, "[Server] Fin de premiere manche\n");
+                                                //Server.gameEngigne.setPlayerTurn(0);
+                                                Server.mainTable.initMidDeck();
+                                                Server.mainTable.setWinningCard(null);
+                                            }
+                                        } else {
+                                            Server.getPlayerByChannel(channel).removeOnDeck(command[1], command[2]);
+                                            Server.writeMessage(channel, "[Server] Card Dropped\n");
+                                            if (Server.gameEngigne.getPlayerTurn() < 4) {
+                                                //Server.mainTable.setWinningCard();
+                                                System.out.println(Server.gameEngigne.getPlayerTurn());
+                                                if (Server.mainTable.checkValueNonAtout(Server.mainTable.getWinningCard().getFamilyName().toString(), Server.mainTable.getMidDeck()[Server.gameEngigne.getPlayerTurn()].getFamilyName().toString()) == Server.mainTable.getMidDeck()[Server.gameEngigne.getPlayerTurn()].getFamilyName().toString())
+                                                    Server.mainTable.setWinningCard(Server.mainTable.getMidDeck()[Server.gameEngigne.getPlayerTurn()]);
+                                            }
+                                            if (Server.gameEngigne.getPlayerTurn() == 3) {
+                                                Server.writeMessage(channel, "[Server] Fin de premiere manche\n");
+                                                //Server.gameEngigne.setPlayerTurn(0);
+                                                Server.mainTable.initMidDeck();
+                                                Server.mainTable.setWinningCard(null);
+                                            }
+                                        }
+                                        Server.gameEngigne.GoNextPlayerTurn();
+                                    } else // si la carte qu'on veut poser est pas égale a la famille de la premiere donc peut etre pas égale a l'atout
+                                    // SI egal a atout et egal a family ca va pas rentrer dedans
+                                    //si egal a atout mais pas égal a family , rentre ici !
+                                    {
+                                        // Si il a trouvé une carte de la famille de la 1ere card
+                                        if (Server.getPlayerByChannel(channel).searchFirstcardFamily(Server.mainTable.getFirstCardFamily().toString())) {
+                                            System.out.println("You have a " +  Server.mainTable.getWinningCard().getFamilyCard().toString()  + " in your deck, play it");
+                                            Server.writeMessage(channel, "You have a "  +  Server.mainTable.getWinningCard().getFamilyCard().toString()  +  " in your deck, play it\n");
+                                        }
+                                        else {
+                                            //check si il pisse de l'atout ou pas ( SI C PAS DE LA MEME FAMILLE MAIS ATOUT )
+                                            if (command[2].equalsIgnoreCase(Server.mainTable.getAtout().toString()) && (Server.getPlayerByChannel(channel).searchFirstcardFamily(Server.mainTable.getFirstCardFamily().toString()) == false)) {
+                                                // if winning card est atout check value des deux
+                                                // if winning card != atout
+                                                //wining card == command[2]
+                                                // SI LA WINNING =
+                                                if (Server.mainTable.getWinningCard().getFamilyCard().toString().equalsIgnoreCase(Server.mainTable.getAtout().toString())) {
+                                                    System.out.println("command1 = "  + command[1]  + " command 2" +  command[2]);
+                                                    Server.getPlayerByChannel(channel).removeOnDeck(command[1], command[2]);
+                                                    if (Server.gameEngigne.getPlayerTurn() < 4) {
+                                                        //Server.mainTable.setWinningCard();
+                                                        if (Server.mainTable.checkValueAtout(Server.mainTable.getWinningCard().getFamilyName().toString(), Server.mainTable.getMidDeck()[Server.gameEngigne.getPlayerTurn()].getFamilyName().toString()) == Server.mainTable.getMidDeck()[Server.gameEngigne.getPlayerTurn()].getFamilyName().toString())
+                                                            Server.mainTable.setWinningCard(Server.mainTable.getMidDeck()[Server.gameEngigne.getPlayerTurn()]);
+                                                    }
+                                                    if (Server.gameEngigne.getPlayerTurn() == 3) {
+                                                        System.out.println("FIN DE LA MANCHE");
+                                                        Server.writeMessage(channel, "[Server] Fin de la manche\n");
+                                                        //Server.gameEngigne.setPlayerTurn(0);
+                                                        Server.mainTable.initMidDeck();
+                                                        Server.mainTable.setWinningCard(null);
+                                                    }
+                                                }
+                                                else { // LE CAS OU JE COUPE AVEC DE LATOUT
+                                                    Server.getPlayerByChannel(channel).removeOnDeck(command[1], command[2]);
+                                                    Server.mainTable.setWinningCard(Server.mainTable.getMidDeck()[Server.gameEngigne.getPlayerTurn()]);
+                                                }
+                                            }
+                                            else // LE CAS OU JE JETTE JUSTE DE LA MERDE SANS ATOUT SANS RIEN
+                                            {
+                                                Server.getPlayerByChannel(channel).removeOnDeck(command[1], command[2]);
+                                            }
+                                            Server.gameEngigne.GoNextPlayerTurn();
+                                        }
+                                    }
+                                    //Server.gameEngigne.GoNextPlayerTurn();
+                                }
+                                else {
+                                    Server.writeMessage(channel,"[Server] You don't have this card or already used, try again !\n");
+                                }
+
+                            }
+
+                        }
+
+                    } else {
+
+                        Server.writeMessage(channel,"[Server] You can't drop ! Not your turn\n");
+
+                    }
+                }
+
+                break;
+
+
             default:
                 Server.writeMessage(channel, "[Server] Command Unkown\n");
                 break;

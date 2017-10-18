@@ -3,6 +3,7 @@ import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.concurrent.SynchronousQueue;
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
@@ -113,7 +114,7 @@ public class GameGraphicPanel extends JPanel {
             int xOriginP1Cards = Player3OriginX + 15 + PlayerBoxWidth;
             int yOriginP1Cards = Player3OriginY;
 
-           for (int i = 0; i < teamTwo[0].getDeck().length; i += 1)
+            for (int i = 0; i < teamTwo[0].getDeck().length; i += 1)
             {
                 try {
                     String filename = "";
@@ -212,8 +213,7 @@ public class GameGraphicPanel extends JPanel {
             if (midDeck[i] == null)
                 fileName = "neutreCard.png";
             else
-                fileName = midDeck[i].getFamilyName().toString().toLowerCase() + "_" + midDeck[i].getFamilyName().toString().toLowerCase() + ".png";
-
+                fileName = midDeck[i].getFamilyCard().toString().toLowerCase() + "_" + midDeck[i].getFamilyName().toString().toLowerCase() + ".png";
             try {
                 Image img = ImageIO.read(new File(fileName));
                 g.drawImage(img, xOrigin, yOrigin, CardWidth, CardHeight,this);

@@ -21,8 +21,7 @@ public enum CardName{
                 return 11;
 
             case "sept": case "huit":
-                if (isAtout)
-                    return 0;
+                return 0;
 
             case "neuf":
                 if (isAtout)

@@ -7,8 +7,11 @@ public class Table
     private Team teams[];
     private Card midDeck[];
     private Card mainDeck[];
+
     private Card winningCard;
-    private Team winningCardTeam;
+    private Player winningCardPlayer;
+    private int  sumCardDroppedPli;
+
     private GameState state;
     private CardFamily firstCard;
 
@@ -20,6 +23,7 @@ public class Table
         this.midDeck = new Card[4];
         this.mainDeck = new Card[32];
         this.state = GameState.Init;
+        this.sumCardDroppedPli = 0;
         this.initMainDeck();
     }
 
@@ -42,6 +46,19 @@ public class Table
                 mainDeckIndex += 1;
             }
         }
+    }
+
+    public void AddSumCardDropped(int value)
+    {
+        this.sumCardDroppedPli += value;
+    }
+
+    public int getSumCardDroppedPli() {
+        return sumCardDroppedPli;
+    }
+
+    public void setSumCardDroppedPli(int sumCardDroppedPli) {
+        this.sumCardDroppedPli = sumCardDroppedPli;
     }
 
     public Card PickRandomCardInMainDeck()
@@ -126,12 +143,12 @@ public class Table
         this.winningCard = winningCard;
     }
 
-    public Team getWinningCardTeam() {
-        return winningCardTeam;
+    public Player getWinningCardPlayer() {
+        return winningCardPlayer;
     }
 
-    public void setWinningCardTeam(Team winningCardTeam) {
-        this.winningCardTeam = winningCardTeam;
+    public void setWinningCardPlayer(Player winningCardPlayer) {
+        this.winningCardPlayer = winningCardPlayer;
     }
 
     public GameState getState() {

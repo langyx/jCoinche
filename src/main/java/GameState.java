@@ -3,7 +3,8 @@ public enum GameState{
     Waitting,
     Bet,
     BetTraitement,
-    Pli;
+    Pli,
+    Ended;
 
     @Override
     public String toString() {
@@ -19,6 +20,8 @@ public enum GameState{
                 return "Result of bet round.";
             case "Pli":
                 return "Playing!";
+            case "Ended":
+                return "Game Ended !";
             default:
                 return "Idle.";
         }

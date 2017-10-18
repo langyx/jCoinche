@@ -97,6 +97,64 @@ public class GameEngine extends Thread
                 break;
 
             case Pli:
+                if (Server.gameEngigne.getPlayerTurn() == 3) {
+                    while (Server.gameEngigne.getPlayerTurn() != 0)
+                    {
+                        try {
+                            sleep(100);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                    }
+
+                    int sumRoundPoint = Server.mainTable.getSumCardDroppedPli();
+                    Server.writeMessageForAllPlayer("[Server] Round ended by " + sumRoundPoint + " points \n");
+                    Server.mainTable.getTeamOfPlayer(Server.mainTable.getWinningCardPlayer().getChannel()).addScore(sumRoundPoint);
+                    Server.mainTable.setSumCardDroppedPli(0);
+                    Server.mainTable.initMidDeck();
+                    Server.mainTable.setWinningCard(null);
+                    Server.mainTable.setWinningCardPlayer(null);
+
+                    if (Server.countArray(Server.mainTable.getTeams()[0].getPlayers()[0].getDeck()) == 0)
+                    {
+                        Team attTeam = this.getBestBetTeam(false);
+                        Team defTeam = this.getBestBetTeam(true);
+                        Server.mainTable.setState(GameState.Ended);
+
+                        int scoreAtt = attTeam.getScore();
+                        int scoreDef = defTeam.getScore();
+
+                        int finalAttScore = 0;
+                        int finalDefScore = 0;
+
+                        if (scoreAtt >= attTeam.getBet())
+                        {
+                            Server.writeMessageForAllPlayer("Attacking team succeeded!\n");
+                            finalAttScore = scoreAtt + (attTeam.getBet() * attTeam.getCoinche());
+                            finalDefScore = scoreDef;
+                        }
+                        else
+                        {
+                            Server.writeMessageForAllPlayer("Attacking team failed!\n");
+                            finalDefScore = scoreDef + (attTeam.getBet() * attTeam.getCoinche());
+                        }
+
+                        Server.writeMessageForAllPlayer("Round Score : [Att] + " + finalAttScore + " - " + finalDefScore + " [Def]\n");
+
+                        this.getBestBetTeam(false).setGameScore(finalAttScore);
+                        this.getBestBetTeam(true).setGameScore(finalDefScore);
+
+                        Server.writeMessageForAllPlayer("Game Score : [Att] + "
+                                + this.getBestBetTeam(false).getGameScore() + " - "
+                                + this.getBestBetTeam(true).getGameScore() + " [Def]\n");
+
+                        Server.mainTable.setState(GameState.Ended);
+                    }
+                }
+                break;
+
+            case Ended:
+
                 break;
 
             default:
@@ -146,6 +204,11 @@ public class GameEngine extends Thread
 
     public void GoNextPlayerTurn()
     {
+        try {
+            Thread.sleep(100);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         if (this.playerTurn == 3)
         {
             this.playerTurn = 0;

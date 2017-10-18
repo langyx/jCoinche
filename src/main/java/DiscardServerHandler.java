@@ -285,6 +285,7 @@ public class DiscardServerHandler extends ChannelInboundHandlerAdapter { // (1)
                                     Server.writeMessage(channel, "[Server] Card Dropped\n");
                                     Server.mainTable.setFirstCardFamily(CardFamily.getCardFamilyFromString(command[2]));
                                     Server.mainTable.setWinningCard(Server.mainTable.getMidDeck()[0]); // CHECK LA MEILLEUR DES ATOUT ET LA DONNER A WINNINGCARD
+                                    Server.mainTable.setWinningCardPlayer(currPlayer);
                                     Server.gameEngigne.GoNextPlayerTurn();
                                     // PLAYER OBLIGE DE METTRE LE MEME TYPE QUE LA CARTE DU MILIEU
                                 } else {
@@ -304,28 +305,22 @@ public class DiscardServerHandler extends ChannelInboundHandlerAdapter { // (1)
                                             if (Server.gameEngigne.getPlayerTurn() < 4) {
                                                 //Server.mainTable.setWinningCard();
                                                 if (Server.mainTable.checkValueAtout(Server.mainTable.getWinningCard().getFamilyName().toString(), Server.mainTable.getMidDeck()[Server.gameEngigne.getPlayerTurn()].getFamilyName().toString()) == Server.mainTable.getMidDeck()[Server.gameEngigne.getPlayerTurn()].getFamilyName().toString())
+                                                {
                                                     Server.mainTable.setWinningCard(Server.mainTable.getMidDeck()[Server.gameEngigne.getPlayerTurn()]);
+                                                    Server.mainTable.setWinningCardPlayer(currPlayer);
+                                                }
                                             }
-                                            if (Server.gameEngigne.getPlayerTurn() == 3) {
-                                                Server.writeMessage(channel, "[Server] Fin de premiere manche\n");
-                                                //Server.gameEngigne.setPlayerTurn(0);
-                                                Server.mainTable.initMidDeck();
-                                                Server.mainTable.setWinningCard(null);
-                                            }
+
                                         } else {
                                             Server.getPlayerByChannel(channel).removeOnDeck(command[1], command[2]);
                                             Server.writeMessage(channel, "[Server] Card Dropped\n");
                                             if (Server.gameEngigne.getPlayerTurn() < 4) {
-                                                //Server.mainTable.setWinningCard();
                                                 System.out.println(Server.gameEngigne.getPlayerTurn());
                                                 if (Server.mainTable.checkValueNonAtout(Server.mainTable.getWinningCard().getFamilyName().toString(), Server.mainTable.getMidDeck()[Server.gameEngigne.getPlayerTurn()].getFamilyName().toString()) == Server.mainTable.getMidDeck()[Server.gameEngigne.getPlayerTurn()].getFamilyName().toString())
+                                                {
+                                                    Server.mainTable.setWinningCardPlayer(currPlayer);
                                                     Server.mainTable.setWinningCard(Server.mainTable.getMidDeck()[Server.gameEngigne.getPlayerTurn()]);
-                                            }
-                                            if (Server.gameEngigne.getPlayerTurn() == 3) {
-                                                Server.writeMessage(channel, "[Server] Fin de premiere manche\n");
-                                                //Server.gameEngigne.setPlayerTurn(0);
-                                                Server.mainTable.initMidDeck();
-                                                Server.mainTable.setWinningCard(null);
+                                                }
                                             }
                                         }
                                         Server.gameEngigne.GoNextPlayerTurn();
@@ -349,21 +344,17 @@ public class DiscardServerHandler extends ChannelInboundHandlerAdapter { // (1)
                                                     System.out.println("command1 = "  + command[1]  + " command 2" +  command[2]);
                                                     Server.getPlayerByChannel(channel).removeOnDeck(command[1], command[2]);
                                                     if (Server.gameEngigne.getPlayerTurn() < 4) {
-                                                        //Server.mainTable.setWinningCard();
                                                         if (Server.mainTable.checkValueAtout(Server.mainTable.getWinningCard().getFamilyName().toString(), Server.mainTable.getMidDeck()[Server.gameEngigne.getPlayerTurn()].getFamilyName().toString()) == Server.mainTable.getMidDeck()[Server.gameEngigne.getPlayerTurn()].getFamilyName().toString())
+                                                        {
                                                             Server.mainTable.setWinningCard(Server.mainTable.getMidDeck()[Server.gameEngigne.getPlayerTurn()]);
-                                                    }
-                                                    if (Server.gameEngigne.getPlayerTurn() == 3) {
-                                                        System.out.println("FIN DE LA MANCHE");
-                                                        Server.writeMessage(channel, "[Server] Fin de la manche\n");
-                                                        //Server.gameEngigne.setPlayerTurn(0);
-                                                        Server.mainTable.initMidDeck();
-                                                        Server.mainTable.setWinningCard(null);
+                                                            Server.mainTable.setWinningCardPlayer(currPlayer);
+                                                        }
                                                     }
                                                 }
                                                 else { // LE CAS OU JE COUPE AVEC DE LATOUT
                                                     Server.getPlayerByChannel(channel).removeOnDeck(command[1], command[2]);
                                                     Server.mainTable.setWinningCard(Server.mainTable.getMidDeck()[Server.gameEngigne.getPlayerTurn()]);
+                                                    Server.mainTable.setWinningCardPlayer(currPlayer);
                                                 }
                                             }
                                             else // LE CAS OU JE JETTE JUSTE DE LA MERDE SANS ATOUT SANS RIEN

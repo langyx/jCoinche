@@ -6,14 +6,14 @@ public class Team
     private int    score;
     private int    bet;
     private CardFamily betFamily;
-    private int    coinche; // 0 disable // 2 coinched // 3 surcoinched
+    private int    coinche; // 1 disable // 2 coinched // 3 surcoinched
     private int    gameScore;
 
     public Team()
     {
        this.score = 0;
        this.bet = 0;
-       this.coinche = 0;
+       this.coinche = 1;
        this.gameScore = 0;
        this.Players = new Player[2];
 
@@ -79,6 +79,11 @@ public class Team
         this.score = score;
     }
 
+    public void addScore(int score)
+    {
+        this.score += score;
+    }
+
     public int getBet()
     {
         return bet;
@@ -106,7 +111,7 @@ public class Team
 
     public void setGameScore(int gameScore)
     {
-        this.gameScore = gameScore;
+        this.gameScore += gameScore;
     }
 
 

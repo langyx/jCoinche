@@ -114,34 +114,34 @@ public class Player {
     }
 
 
-    public String removeOnDeck(String str1, String str2)
+    public boolean removeOnDeck(String str1, String str2)
 
     {
-        String playerDeck = "";
         Table table = new Table();
         GameEngine gameEngine = new GameEngine();
         if (Server.countArray(this.deck) == 0)
-            return "[Hand] Nothing to remove\n";
+            return false;
         for (int i = 0; i < this.deck.length; i += 1) {
             if (this.deck[i] != null) {
-                if ((str1.equalsIgnoreCase(this.deck[i].getFamilyName().toString())) && (str2.equalsIgnoreCase(this.deck[i].getFamilyCard().toString()))) {
+                if ((str1.equalsIgnoreCase(this.deck[i].getFamilyName().toString()))
+                        && (str2.equalsIgnoreCase(this.deck[i].getFamilyCard().toString())))
+                {
                     Server.mainTable.PushCardOnMid(this.deck[i], count);
-                    String lol = Server.mainTable.getFormattedMidDeck();
+                    if ((Server.mainTable.getAtout().toString().equalsIgnoreCase(this.deck[i].getFamilyCard().toString())))
+                        Server.mainTable.AddSumCardDropped(this.deck[i].getFamilyName().getValue(true));
+                    else
+                        Server.mainTable.AddSumCardDropped(this.deck[i].getFamilyName().getValue(false));
                     this.deck[i] = null;
                     count += 1;
                     if (count == 4)
                         count = 0;
                 }
-                if (this.deck[i] != null)
-                    playerDeck += "[" + this.deck[i].getFamilyCard().toString() + "-" + this.deck[i].getFamilyName() + "]";
-                if (i < this.deck.length)
-                    playerDeck += " ";
+
             }
         }
-        playerDeck += "\n";
-        return playerDeck;
-
+        return  true;
     }
+
 
 
 }

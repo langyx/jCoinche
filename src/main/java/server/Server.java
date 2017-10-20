@@ -6,7 +6,7 @@ import io.netty.channel.Channel;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Server {
+public class Server extends DiscardServerHandler {
 
     public static Table mainTable;
     public static List<Player> playerQueue;
@@ -59,7 +59,7 @@ public class Server {
 
     public static void writeMessageForAllPlayer(String message)
     {
-        byte[] bytes = Serializer.serialize(message, CommandType.Info);
+        byte[] bytes = server.Serializer.serialize(message, server.CommandType.Info);
 
         Team tableTeams[] = Server.mainTable.getTeams();
 
@@ -85,7 +85,7 @@ public class Server {
 
     public static void writeMessage(Channel client, String message)
     {
-       client.writeAndFlush(Unpooled.wrappedBuffer(Serializer.serialize(message, CommandType.Info)));
+       client.writeAndFlush(Unpooled.wrappedBuffer(server.Serializer.serialize(message, server.CommandType.Info)));
     }
 
     public static int getQueueIndex(Channel channel)

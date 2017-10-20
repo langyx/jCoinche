@@ -2,20 +2,20 @@ package server;
 
 public class Command
 {
-    private CommandType type;
+    private server.CommandType type;
     private String[] data;
 
-    public Command(CommandType _type, String[] _args)
+    public Command(server.CommandType _type, String[] _args)
     {
         this.type = _type;
         this.data = _args;
     }
 
-    public CommandType getType() {
+    public server.CommandType getType() {
         return type;
     }
 
-    public void setType(CommandType type) {
+    public void setType(server.CommandType type) {
         this.type = type;
     }
 

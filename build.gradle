@@ -1,5 +1,4 @@
 group 'jcoinche'
-version '1.0-SNAPSHOT'
 
 apply plugin: 'java'
 
@@ -38,8 +37,7 @@ task serverJar(type: Jar) {
     from { configurations.compile.collect { zipTree(it) } }
 
     manifest {
-        attributes 'Implementation-Title': 'jCoincheServer'
-        attributes 'Implementation-Version': version
+        attributes 'Implementation-Title': 'jcoinche-server'
         attributes 'Main-Class': 'server.Server'
     }
 
@@ -53,8 +51,7 @@ task clientJar(type: Jar) {
     from { configurations.compile.collect { zipTree(it) } }
 
     manifest {
-        attributes 'Implementation-Title': 'jCoincheClient'
-        attributes 'Implementation-Version': version
+        attributes 'Implementation-Title': 'jcoinche-client'
         attributes 'Main-Class': 'client.Client'
     }
 }

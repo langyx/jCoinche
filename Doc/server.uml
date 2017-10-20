@@ -1,0 +1,375 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement>server</OriginalElement>
+  <nodes>
+    <node x="393.0" y="1598.5">server.Command</node>
+    <node x="273.80971428571445" y="300.0">server.GameState</node>
+    <node x="751.1022079365085" y="2868.0">server.Server</node>
+    <node x="474.9401174603175" y="1170.5">server.CommandType</node>
+    <node x="425.06511746031754" y="2020.0">server.Serializer</node>
+    <node x="1090.6901174603177" y="1844.0">server.GameGraphicPanel</node>
+    <node x="634.4401174603175" y="311.0">server.Tools</node>
+    <node x="914.1619047619048" y="1125.0">server.Player</node>
+    <node x="1117.0028412698418" y="0.0">server.CardName</node>
+    <node x="542.9401174603175" y="2386.0">server.DiscardServerHandler</node>
+    <node x="1197.4930476190477" y="1499.0">server.Team</node>
+    <node x="10.5" y="639.0">server.GameEngine</node>
+    <node x="1178.5930476190476" y="584.0">server.Table</node>
+    <node x="666.8522079365084" y="2619.0">server.DiscardServer</node>
+    <node x="1071.9401174603177" y="2452.0">server.GameGraphicFrame</node>
+    <node x="1338.002841269842" y="44.0">server.CardFamily</node>
+    <node x="1017.9401174603175" y="2619.0">server.GameGraphic</node>
+    <node x="1205.2528412698418" y="321.0">server.Card</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="server.DiscardServerHandler" target="server.Player">
+      <point x="81.0" y="-91.5" />
+      <point x="839.9401174603175" y="2356.0" />
+      <point x="890.2089920634926" y="2356.0" />
+      <point x="890.2089920634926" y="1479.0" />
+      <point x="965.1619047619048" y="1479.0" />
+      <point x="-102.0" y="137.0" />
+    </edge>
+    <edge source="server.Table" target="server.CardName">
+      <point x="-36.888888888888914" y="-235.5" />
+      <point x="1307.7041587301587" y="504.0" />
+      <point x="1194.7528412698418" y="504.0" />
+      <point x="1194.7528412698418" y="280.0" />
+      <point x="1192.3778412698418" y="280.0" />
+      <point x="-25.125" y="125.0" />
+    </edge>
+    <edge source="server.DiscardServer" target="server.DiscardServerHandler">
+      <point x="0.0" y="-59.5" />
+      <point x="0.0" y="91.5" />
+    </edge>
+    <edge source="server.DiscardServerHandler" target="server.GameState">
+      <point x="-135.0" y="-91.5" />
+      <point x="623.9401174603175" y="2356.0" />
+      <point x="363.0" y="2356.0" />
+      <point x="363.0" y="564.0" />
+      <point x="337.18471428571445" y="564.0" />
+      <point x="-21.125" y="92.0" />
+    </edge>
+    <edge source="server.Table" target="server.Team">
+      <point x="16.59999999999991" y="235.5" />
+      <point x="1361.1930476190475" y="1105.0" />
+      <point x="1369.2083333333335" y="1105.0" />
+      <point x="1369.2083333333335" y="1479.0" />
+      <point x="1358.21526984127" y="1479.0" />
+      <point x="29.22222222222217" y="-147.5" />
+    </edge>
+    <edge source="server.Team" target="server.CardFamily">
+      <point x="116.88888888888886" y="-147.5" />
+      <point x="1445.8819365079366" y="1479.0" />
+      <point x="1624.6763888888888" y="1479.0" />
+      <point x="1624.6763888888888" y="270.0" />
+      <point x="1605.9314126984132" y="270.0" />
+      <point x="97.42857142857133" y="81.0" />
+    </edge>
+    <edge source="server.GameGraphicPanel" target="server.Player">
+      <point x="-37.875" y="-246.0" />
+      <point x="1204.3151174603177" y="1814.0" />
+      <point x="1186.3930476190478" y="1814.0" />
+      <point x="1186.3930476190478" y="1479.0" />
+      <point x="1101.1619047619047" y="1479.0" />
+      <point x="34.0" y="137.0" />
+    </edge>
+    <edge source="server.Player" target="server.GameEngine">
+      <point x="-137.70000000000005" y="-137.0" />
+      <point x="929.4619047619047" y="1095.0" />
+      <point x="245.625" y="1095.0" />
+      <point x="64.125" y="180.5" />
+    </edge>
+    <edge source="server.GameEngine" target="server.GameState">
+      <point x="0.0" y="-180.5" />
+      <point x="181.5" y="564.0" />
+      <point x="294.93471428571445" y="564.0" />
+      <point x="-63.375" y="92.0" />
+    </edge>
+    <edge source="server.Server" target="server.GameGraphic">
+      <point x="67.72500000000002" y="-158.5" />
+      <point x="969.3272079365086" y="2798.0" />
+      <point x="1250.4401174603177" y="2798.0" />
+      <point x="77.5" y="59.5" />
+    </edge>
+    <edge source="server.Server" target="server.Serializer">
+      <point x="-67.72500000000014" y="-158.5" />
+      <point x="833.8772079365084" y="2798.0" />
+      <point x="505.81511746031754" y="2798.0" />
+      <point x="-80.75" y="70.0" />
+    </edge>
+    <edge source="server.Server" target="server.CommandType">
+      <point x="-82.77500000000009" y="-158.5" />
+      <point x="818.8272079365084" y="2808.0" />
+      <point x="382.5" y="2808.0" />
+      <point x="382.5" y="1469.0" />
+      <point x="492.4401174603175" y="1469.0" />
+      <point x="-52.5" y="91.5" />
+    </edge>
+    <edge source="server.Table" target="server.Server">
+      <point x="116.19999999999987" y="235.5" />
+      <point x="1460.7930476190477" y="1095.0" />
+      <point x="1481.9930476190475" y="1095.0" />
+      <point x="1481.9930476190475" y="2838.0" />
+      <point x="1029.5272079365086" y="2838.0" />
+      <point x="127.92499999999995" y="-158.5" />
+    </edge>
+    <edge source="server.DiscardServerHandler" target="server.Serializer">
+      <point x="-81.0" y="-91.5" />
+      <point x="677.9401174603175" y="2366.0" />
+      <point x="667.3151174603175" y="2366.0" />
+      <point x="80.75" y="70.0" />
+    </edge>
+    <edge source="server.Team" target="server.Player">
+      <point x="-58.44444444444457" y="-147.5" />
+      <point x="1270.5486031746032" y="1429.0" />
+      <point x="1169.1619047619047" y="1429.0" />
+      <point x="102.0" y="137.0" />
+    </edge>
+    <edge source="server.DiscardServerHandler" target="server.Server">
+      <point x="-144.0" y="91.5" />
+      <point x="614.9401174603175" y="2594.0" />
+      <point x="644.9589920634926" y="2594.0" />
+      <point x="644.9589920634926" y="2788.0" />
+      <point x="848.9272079365085" y="2788.0" />
+      <point x="-52.67500000000007" y="-158.5" />
+    </edge>
+    <edge source="server.GameEngine" target="server.Player">
+      <point x="149.625" y="180.5" />
+      <point x="331.125" y="1075.0" />
+      <point x="990.6619047619048" y="1075.0" />
+      <point x="-76.5" y="-137.0" />
+    </edge>
+    <edge source="server.Server" target="server.Team">
+      <point x="97.82499999999993" y="-158.5" />
+      <point x="999.4272079365085" y="2818.0" />
+      <point x="1410.642325396826" y="2818.0" />
+      <point x="1410.642325396826" y="1814.0" />
+      <point x="1416.6597142857145" y="1814.0" />
+      <point x="87.66666666666669" y="147.5" />
+    </edge>
+    <edge source="server.Player" target="server.Server">
+      <point x="-68.0" y="137.0" />
+      <point x="999.1619047619048" y="1459.0" />
+      <point x="985.4401174603175" y="1459.0" />
+      <point x="985.4401174603175" y="2758.0" />
+      <point x="909.1272079365085" y="2758.0" />
+      <point x="7.524999999999977" y="-158.5" />
+    </edge>
+    <edge source="server.Serializer" target="server.CommandType">
+      <point x="107.66666666666663" y="-70.0" />
+      <point x="694.5" y="1469.0" />
+      <point x="597.4401174603174" y="1469.0" />
+      <point x="52.5" y="91.5" />
+    </edge>
+    <edge source="server.Player" target="server.Card">
+      <point x="-15.299999999999955" y="-137.0" />
+      <point x="1051.861904761905" y="1105.0" />
+      <point x="1046.6028492063497" y="1105.0" />
+      <point x="1046.6028492063497" y="554.0" />
+      <point x="1258.8242698412705" y="554.0" />
+      <point x="-71.42857142857133" y="71.0" />
+    </edge>
+    <edge source="server.DiscardServerHandler" target="server.CardName">
+      <point x="-189.0" y="-91.5" />
+      <point x="569.9401174603175" y="2366.0" />
+      <point x="0.0" y="2366.0" />
+      <point x="0.0" y="280.0" />
+      <point x="1142.1278412698418" y="280.0" />
+      <point x="-75.375" y="125.0" />
+    </edge>
+    <edge source="server.Serializer" target="server.Command">
+      <point x="-107.66666666666669" y="-70.0" />
+      <point x="478.89845079365085" y="1824.0" />
+      <point x="465.75" y="1824.0" />
+      <point x="-72.75" y="48.0" />
+    </edge>
+    <edge source="server.GameEngine" target="server.Team">
+      <point x="21.375" y="180.5" />
+      <point x="202.875" y="1105.0" />
+      <point x="633.6847142857143" y="1105.0" />
+      <point x="633.6847142857143" y="1449.0" />
+      <point x="1212.1041587301588" y="1449.0" />
+      <point x="-116.88888888888891" y="-147.5" />
+    </edge>
+    <edge source="server.Command" target="server.CommandType">
+      <point x="72.75" y="-48.0" />
+      <point x="611.25" y="1479.0" />
+      <point x="562.4401174603174" y="1479.0" />
+      <point x="17.5" y="91.5" />
+    </edge>
+    <edge source="server.Server" target="server.DiscardServer">
+      <point x="-37.625" y="-158.5" />
+      <point x="863.9772079365085" y="2778.0" />
+      <point x="712.6022079365084" y="2778.0" />
+      <point x="-45.75" y="59.5" />
+    </edge>
+    <edge source="server.Card" target="server.CardName">
+      <point x="-31.25" y="-71.0" />
+      <point x="1299.0028412698418" y="280.0" />
+      <point x="1292.8778412698418" y="280.0" />
+      <point x="75.375" y="125.0" />
+    </edge>
+    <edge source="server.GameGraphic" target="server.GameGraphicFrame">
+      <point x="-77.5" y="-59.5" />
+      <point x="1095.4401174603177" y="2594.0" />
+      <point x="1122.4401174603177" y="2594.0" />
+      <point x="-50.5" y="25.5" />
+    </edge>
+    <edge source="server.Table" target="server.GameState">
+      <point x="-147.55555555555566" y="-235.5" />
+      <point x="1197.037492063492" y="534.0" />
+      <point x="379.43471428571445" y="534.0" />
+      <point x="21.125" y="92.0" />
+    </edge>
+    <edge source="server.GameGraphicPanel" target="server.Card">
+      <point x="113.625" y="-246.0" />
+      <point x="1355.8151174603177" y="1824.0" />
+      <point x="1521.0930476190479" y="1824.0" />
+      <point x="1521.0930476190479" y="544.0" />
+      <point x="1437.395698412699" y="544.0" />
+      <point x="107.14285714285717" y="71.0" />
+    </edge>
+    <edge source="server.DiscardServerHandler" target="server.Team">
+      <point x="135.0" y="-91.5" />
+      <point x="893.9401174603175" y="2366.0" />
+      <point x="901.2089920634926" y="2366.0" />
+      <point x="901.2089920634926" y="1824.0" />
+      <point x="1241.326380952381" y="1824.0" />
+      <point x="-87.66666666666674" y="147.5" />
+    </edge>
+    <edge source="server.GameGraphicPanel" target="server.Server">
+      <point x="75.75" y="246.0" />
+      <point x="1317.9401174603177" y="2356.0" />
+      <point x="1338.4401174603177" y="2356.0" />
+      <point x="1338.4401174603177" y="2808.0" />
+      <point x="984.3772079365085" y="2808.0" />
+      <point x="82.77499999999998" y="-158.5" />
+    </edge>
+    <edge source="server.Card" target="server.CardFamily">
+      <point x="31.25" y="-71.0" />
+      <point x="-146.1428571428571" y="81.0" />
+    </edge>
+    <edge source="server.Table" target="server.CardFamily">
+      <point x="147.5555555555557" y="-235.5" />
+      <point x="1492.1486031746035" y="564.0" />
+      <point x="1534.1359507936509" y="564.0" />
+      <point x="1534.1359507936509" y="270.0" />
+      <point x="1508.502841269842" y="270.0" />
+      <point x="0.0" y="81.0" />
+    </edge>
+    <edge source="server.Server" target="server.Player">
+      <point x="22.575000000000045" y="-158.5" />
+      <point x="924.1772079365086" y="2768.0" />
+      <point x="996.4401174603175" y="2768.0" />
+      <point x="996.4401174603175" y="1469.0" />
+      <point x="1033.1619047619047" y="1469.0" />
+      <point x="-34.0" y="137.0" />
+    </edge>
+    <edge source="server.GameGraphicPanel" target="server.Tools">
+      <point x="-113.625" y="-246.0" />
+      <point x="1128.5651174603177" y="1814.0" />
+      <point x="775.3333333333334" y="1814.0" />
+      <point x="775.3333333333334" y="564.0" />
+      <point x="793.4401174603175" y="564.0" />
+      <point x="0.0" y="81.0" />
+    </edge>
+    <edge source="server.DiscardServerHandler" target="server.Tools">
+      <point x="-27.0" y="-91.5" />
+      <point x="731.9401174603175" y="2366.0" />
+      <point x="764.3333333333334" y="2366.0" />
+      <point x="764.3333333333334" y="564.0" />
+      <point x="687.4401174603175" y="564.0" />
+      <point x="-106.0" y="81.0" />
+    </edge>
+    <edge source="server.Table" target="server.Tools">
+      <point x="-73.77777777777783" y="-235.5" />
+      <point x="1270.8152698412698" y="514.0" />
+      <point x="899.4401174603175" y="514.0" />
+      <point x="106.0" y="81.0" />
+    </edge>
+    <edge source="server.GameGraphicFrame" target="server.GameGraphicPanel">
+      <point x="0.0" y="-25.5" />
+      <point x="1172.9401174603177" y="2356.0" />
+      <point x="1166.4401174603177" y="2356.0" />
+      <point x="-75.75" y="246.0" />
+    </edge>
+    <edge source="server.DiscardServerHandler" target="server.CardFamily">
+      <point x="189.0" y="-91.5" />
+      <point x="947.9401174603175" y="2366.0" />
+      <point x="1635.6763888888888" y="2366.0" />
+      <point x="1635.6763888888888" y="280.0" />
+      <point x="1654.645698412699" y="280.0" />
+      <point x="146.1428571428571" y="81.0" />
+    </edge>
+    <edge source="server.Player" target="server.Table">
+      <point x="45.90000000000009" y="-137.0" />
+      <point x="1113.0619047619048" y="1075.0" />
+      <point x="1195.1930476190475" y="1075.0" />
+      <point x="-149.4000000000001" y="235.5" />
+    </edge>
+    <edge source="server.Server" target="server.DiscardServerHandler">
+      <point x="-7.525000000000091" y="-158.5" />
+      <point x="894.0772079365084" y="2758.0" />
+      <point x="872.3333333333334" y="2758.0" />
+      <point x="872.3333333333334" y="2594.0" />
+      <point x="902.9401174603175" y="2594.0" />
+      <point x="144.0" y="91.5" />
+    </edge>
+    <edge source="server.Table" target="server.Player">
+      <point x="-49.799999999999955" y="235.5" />
+      <point x="1294.7930476190477" y="1105.0" />
+      <point x="1204.861904761905" y="1105.0" />
+      <point x="137.70000000000005" y="-137.0" />
+    </edge>
+    <edge source="server.Server" target="server.Table">
+      <point x="112.875" y="-158.5" />
+      <point x="1014.4772079365085" y="2828.0" />
+      <point x="1470.9930476190475" y="2828.0" />
+      <point x="1470.9930476190475" y="1105.0" />
+      <point x="1427.5930476190479" y="1105.0" />
+      <point x="83.00000000000006" y="235.5" />
+    </edge>
+    <edge source="server.GameGraphicPanel" target="server.Team">
+      <point x="37.875" y="-246.0" />
+      <point x="1280.0651174603177" y="1824.0" />
+      <point x="1328.9930476190477" y="1824.0" />
+      <point x="0.0" y="147.5" />
+    </edge>
+    <edge source="server.GameEngine" target="server.Server">
+      <point x="-64.125" y="180.5" />
+      <point x="117.375" y="1105.0" />
+      <point x="65.60220793650853" y="1105.0" />
+      <point x="65.60220793650853" y="2828.0" />
+      <point x="788.7272079365084" y="2828.0" />
+      <point x="-112.87500000000011" y="-158.5" />
+    </edge>
+    <edge source="server.Table" target="server.Card">
+      <point x="0.0" y="-235.5" />
+      <point x="1344.5930476190476" y="564.0" />
+      <point x="1330.2528412698418" y="564.0" />
+      <point x="0.0" y="71.0" />
+    </edge>
+    <edge source="server.Server" target="server.GameEngine">
+      <point x="-97.82500000000005" y="-158.5" />
+      <point x="803.7772079365085" y="2818.0" />
+      <point x="134.30971428571445" y="2818.0" />
+      <point x="134.30971428571445" y="1105.0" />
+      <point x="160.125" y="1105.0" />
+      <point x="-21.375" y="180.5" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic Group" zoom="0.3549141965678627" x="795.6571428571428" y="1711.9824175824176" />
+  <SelectedNodes />
+  <Categories>
+    <Category>Fields</Category>
+    <Category>Constructors</Category>
+    <Category>Methods</Category>
+    <Category>Properties</Category>
+  </Categories>
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+

@@ -30,6 +30,7 @@ public class Client extends Thread{
         }catch (Exception e)
         {
             System.out.println("Unable to connect");
+            System.exit(0);
         }
 
     }
@@ -77,7 +78,10 @@ public class Client extends Thread{
         }
         else
         {
-            client.writeAndFlush(Unpooled.wrappedBuffer(Serializer.serialize(message, CommandType.Info)));
+            if (!client.isActive())
+                System.out.println("out");
+            else
+                client.writeAndFlush(Unpooled.wrappedBuffer(Serializer.serialize(message, CommandType.Info)));
         }
     }
 

@@ -1,7 +1,9 @@
 package server;
 
 import com.google.gson.Gson;
+import com.google.gson.stream.JsonReader;
 
+import java.io.StringReader;
 import java.util.Base64;
 
 public class Serializer
@@ -31,8 +33,10 @@ public class Serializer
     {
         Gson gson = new Gson();
         byte[] decodedBytes = Base64.getMimeDecoder().decode(data);
-        String dataDecoded = new String(decodedBytes);
-        Command newCommand = gson.fromJson(dataDecoded, Command.class);
+        String decodeString = new String(decodedBytes);
+        JsonReader reader = new JsonReader(new StringReader(decodeString));
+        reader.setLenient(true);
+        Command newCommand = gson.fromJson(reader, Command.class);
         return newCommand;
     }
 

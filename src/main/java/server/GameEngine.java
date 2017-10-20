@@ -58,7 +58,7 @@ public class GameEngine extends Thread
     protected void gamingCore() throws InterruptedException {
         while (!this.isTheGamePlayable())
         {
-            //server.Server.writeMessageForAllPlayer("[server.Server] Waiting for full team\n");
+            //Server.writeMessageForAllPlayer("[Server] Waiting for full team\n");
             sleep(1000);
         }
 
@@ -89,7 +89,7 @@ public class GameEngine extends Thread
 
                 Server.mainTable.setAtout(attackingTeam.getBetFamily());
 
-                Server.writeMessageForAllPlayer("[server.Server] Start Game ! Atout is [" + attackingTeam.getBetFamily().toString() + "]\n");
+                Server.writeMessageForAllPlayer("[Server] Start Game ! Atout is [" + attackingTeam.getBetFamily().toString() + "]\n");
 
                 Server.mainTable.setState(GameState.Pli);
                 break;
@@ -109,7 +109,7 @@ public class GameEngine extends Thread
                     }
 
                     int sumRoundPoint = Server.mainTable.getSumCardDroppedPli();
-                    Server.writeMessageForAllPlayer("[server.Server] Round ended by " + sumRoundPoint + " points \n");
+                    Server.writeMessageForAllPlayer("[Server] Round ended by " + sumRoundPoint + " points \n");
                     Server.mainTable.getTeamOfPlayer(Server.mainTable.getWinningCardPlayer().getChannel()).addScore(sumRoundPoint);
                     Server.mainTable.setSumCardDroppedPli(0);
                     Server.mainTable.initMidDeck();
@@ -128,26 +128,32 @@ public class GameEngine extends Thread
                         int finalAttScore = 0;
                         int finalDefScore = 0;
 
+                        int coincheMultiplicator = attTeam.getCoinche() > 0 ? attTeam.getCoinche() : 1;
+
                         if (scoreAtt >= attTeam.getBet())
                         {
                             Server.writeMessageForAllPlayer("Attacking team succeeded!\n");
-                            finalAttScore = scoreAtt + (attTeam.getBet() * attTeam.getCoinche());
+                            finalAttScore = scoreAtt + (attTeam.getBet() * coincheMultiplicator);
                             finalDefScore = scoreDef;
                         }
                         else
                         {
                             Server.writeMessageForAllPlayer("Attacking team failed!\n");
-                            finalDefScore = scoreDef + (attTeam.getBet() * attTeam.getCoinche());
+                            finalDefScore = scoreDef + (attTeam.getBet() * coincheMultiplicator);
                         }
 
-                        Server.writeMessageForAllPlayer("Round Score : [Att] + " + finalAttScore + " - " + finalDefScore + " [Def]\n");
+                        String messageRoundScore = "Round Score " + Integer.toString(finalAttScore) + " vs "
+                                + Integer.toString(finalDefScore) + "\n";
+                        Server.writeMessageForAllPlayer(messageRoundScore);
+
 
                         this.getBestBetTeam(false).setGameScore(finalAttScore);
                         this.getBestBetTeam(true).setGameScore(finalDefScore);
 
-                        Server.writeMessageForAllPlayer("Game Score : [Att] + "
-                                + this.getBestBetTeam(false).getGameScore() + " - "
-                                + this.getBestBetTeam(true).getGameScore() + " [Def]\n");
+                        String messageGameScore = "Game Score "
+                                + Integer.toString(this.getBestBetTeam(false).getGameScore()) + " vs "
+                                + Integer.toString(this.getBestBetTeam(true).getGameScore()) + "\n";
+                        Server.writeMessageForAllPlayer(messageGameScore);
 
                         Server.mainTable.setState(GameState.Ended);
                     }
@@ -155,6 +161,20 @@ public class GameEngine extends Thread
                 break;
 
             case Ended:
+
+                Server.writeMessageForAllPlayer("New round in 3 seconds....");
+
+                try {
+                    sleep(3000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+
+                Server.mainTable.initMainDeck();
+                Server.mainTable.initMidDeck();
+                this.DistributeCardsForPlayers();
+
+                Server.mainTable.setState(GameState.Bet);
 
                 break;
 
@@ -194,9 +214,9 @@ public class GameEngine extends Thread
 
         String distribStateMessage = "a";
         if (distribState == false)
-            distribStateMessage = "[server.Server] Cards distribution failed !\n";
+            distribStateMessage = "[Server] Cards distribution failed !\n";
         else
-            distribStateMessage = "[server.Server] Cards distribution done !\n";
+            distribStateMessage = "[Server] Cards distribution done !\n";
 
         System.out.println(distribStateMessage);
         Server.writeMessageForAllPlayer(distribStateMessage);

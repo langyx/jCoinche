@@ -235,7 +235,7 @@ public class GameGraphicPanel extends JPanel {
         g.setFont(font);
         g.setColor(Color.white);
 
-        /* server.Player One */
+        /* Player One */
         String PlayerOneName = null;
         String PlayerOneIp = null;
         if (teamOne[0] != null) {
@@ -244,15 +244,15 @@ public class GameGraphicPanel extends JPanel {
         }
         else
         {
-            PlayerOneName = "No server.Player";
+            PlayerOneName = "No Player";
             PlayerOneIp = "__";
         }
         g.drawRect(Player1OriginX, Player1OriginY, PlayerBoxWidth, PlayerBoxHeight);
         g.drawString(PlayerOneName, Player1OriginX + PlayerCotentBoxMargin, Player1OriginY + PlayerNameMarging);
         g.drawString(PlayerOneIp, Player1OriginX + PlayerCotentBoxMargin, Player1OriginY + PlayerIpMarging);
-        /* End server.Player One */
+        /* End Player One */
 
-        /* server.Player Two */
+        /* Player Two */
         String PlayerTwoName = null;
         String PlayerTwoIp = null;
         if (teamOne[1] != null) {
@@ -261,15 +261,15 @@ public class GameGraphicPanel extends JPanel {
         }
         else
         {
-            PlayerTwoName = "No server.Player";
+            PlayerTwoName = "No Player";
             PlayerTwoIp = "__";
         }
         g.drawRect(Player2OriginX, Player2OriginY, PlayerBoxWidth, PlayerBoxHeight);
         g.drawString(PlayerTwoName, Player2OriginX + PlayerCotentBoxMargin, Player2OriginY + PlayerNameMarging);
         g.drawString(PlayerTwoIp, Player2OriginX + PlayerCotentBoxMargin, Player2OriginY + PlayerIpMarging);
-        /* End server.Player Two */
+        /* End Player Two */
 
-        /* server.Player Three */
+        /* Player Three */
         String PlayerThreeName = null;
         String PlayerThreeIp = null;
         if (teamTwo[0] != null) {
@@ -278,16 +278,16 @@ public class GameGraphicPanel extends JPanel {
         }
         else
         {
-            PlayerThreeName = "No server.Player";
+            PlayerThreeName = "No Player";
             PlayerThreeIp = "__";
         }
         g.drawRect(Player3OriginX, Player3OriginY, PlayerBoxWidth, PlayerBoxHeight);
         g.drawString(PlayerThreeName, Player3OriginX + PlayerCotentBoxMargin, Player3OriginY + PlayerNameMarging);
         g.drawString(PlayerThreeIp, Player3OriginX + PlayerCotentBoxMargin, Player3OriginY + PlayerIpMarging);
-        /* End server.Player Three */
+        /* End Player Three */
 
 
-        /* server.Player Four */
+        /* Player Four */
         String PlayerFourName = null;
         String PlayerFourIp = null;
         if (teamTwo[1] != null) {
@@ -296,13 +296,13 @@ public class GameGraphicPanel extends JPanel {
         }
         else
         {
-            PlayerFourName = "No server.Player";
+            PlayerFourName = "No Player";
             PlayerFourIp = "__";
         }
         g.drawRect(Player4OriginX, Player4OriginY, PlayerBoxWidth, PlayerBoxHeight);
         g.drawString(PlayerFourName, Player4OriginX + PlayerCotentBoxMargin, Player4OriginY + PlayerNameMarging);
         g.drawString(PlayerFourIp, Player4OriginX + PlayerCotentBoxMargin, Player4OriginY + PlayerIpMarging);
-        /* End server.Player Four */
+        /* End Player Four */
 
 
     }

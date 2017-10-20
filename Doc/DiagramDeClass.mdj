@@ -87,7 +87,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "Team",
+											"text": "server.Team",
 											"horizontalAlignment": 2,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -205,7 +205,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "-PlayerOne: Player",
+											"text": "-PlayerOne: server.Player",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -234,7 +234,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "-PlayerTwo: Player",
+											"text": "-PlayerTwo: server.Player",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -492,7 +492,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "+getPlayerOne(): Player",
+											"text": "+getPlayerOne(): server.Player",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -521,7 +521,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "+getPlayerTwo(): Player",
+											"text": "+getPlayerTwo(): server.Player",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -579,7 +579,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "+setPlayerOne(Player)",
+											"text": "+setPlayerOne(server.Player)",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -608,7 +608,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "+setPlayerTwo(Player)",
+											"text": "+setPlayerTwo(server.Player)",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -637,7 +637,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "+Team()",
+											"text": "+server.Team()",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -814,7 +814,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "Player",
+											"text": "server.Player",
 											"horizontalAlignment": 2,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -1045,7 +1045,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "+Player(String, Channel)",
+											"text": "+server.Player(String, Channel)",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -1074,7 +1074,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "+getDeck(): Card[8]",
+											"text": "+getDeck(): server.Card[8]",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -1701,7 +1701,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "Table",
+											"text": "server.Table",
 											"horizontalAlignment": 2,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -1819,7 +1819,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "-atout: CardFamily",
+											"text": "-atout: server.CardFamily",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -1848,7 +1848,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "-teams: Team[2]",
+											"text": "-teams: server.Team[2]",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -1877,7 +1877,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "-midDeck: Card[4]",
+											"text": "-midDeck: server.Card[4]",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -1906,7 +1906,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "-winningCard: Card",
+											"text": "-winningCard: server.Card",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -1935,7 +1935,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "-winningCardTeam: Team",
+											"text": "-winningCardTeam: server.Team",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -1964,7 +1964,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "-state: GameState",
+											"text": "-state: server.GameState",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -2019,7 +2019,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "+getAtout(): CardFamily",
+											"text": "+getAtout(): server.CardFamily",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -2077,7 +2077,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "+getMidDeck(): Card[4]",
+											"text": "+getMidDeck(): server.Card[4]",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -2106,7 +2106,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "+getWinningCard(): Card",
+											"text": "+getWinningCard(): server.Card",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -2135,7 +2135,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "+getWinningCardTeam(): Team",
+											"text": "+getWinningCardTeam(): server.Team",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -2222,7 +2222,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "+getCardValue(Card): UInt",
+											"text": "+getCardValue(server.Card): UInt",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -2251,7 +2251,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "+Table()",
+											"text": "+server.Table()",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -2850,7 +2850,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "GameState",
+											"text": "server.GameState",
 											"horizontalAlignment": 2,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -4241,7 +4241,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "Server",
+											"text": "server.Server",
 											"horizontalAlignment": 2,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -4359,7 +4359,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "-table: Table",
+											"text": "-table: server.Table",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -4388,7 +4388,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "+network: DiscardServer",
+											"text": "+network: server.DiscardServer",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -4589,7 +4589,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "DiscardServer",
+											"text": "server.DiscardServer",
 											"horizontalAlignment": 2,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -5298,7 +5298,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "Command",
+											"text": "server.Command",
 											"horizontalAlignment": 2,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -5416,7 +5416,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "-serializer: Serializer",
+											"text": "-serializer: server.Serializer",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -5529,7 +5529,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "+Command(Byte[])",
+											"text": "+server.Command(Byte[])",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -5558,7 +5558,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "+Command(String)",
+											"text": "+server.Command(String)",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -5793,7 +5793,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "Serializer",
+											"text": "server.Serializer",
 											"horizontalAlignment": 2,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -5995,7 +5995,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "+Serializer(Bytes[*])",
+											"text": "+server.Serializer(Bytes[*])",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -6024,7 +6024,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "+Serializer(String)",
+											"text": "+server.Serializer(String)",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -8245,7 +8245,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "Card",
+											"text": "server.Card",
 											"horizontalAlignment": 2,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -8363,7 +8363,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "-family: CardFamily",
+											"text": "-family: server.CardFamily",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -8392,7 +8392,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "-name: CardName",
+											"text": "-name: server.CardName",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -8447,7 +8447,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "+Card(CardFamily, CardName)",
+											"text": "+server.Card(server.CardFamily, server.CardName)",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -8476,7 +8476,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "+getName(): CardName",
+											"text": "+getName(): server.CardName",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -8505,7 +8505,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "+getFamily(): CardFamily",
+											"text": "+getFamily(): server.CardFamily",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -9103,7 +9103,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "DiscardServerHandler",
+											"text": "server.DiscardServerHandler",
 											"horizontalAlignment": 2,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -9333,7 +9333,7 @@
 					"_parent": {
 						"$ref": "AAAAAAFF+qBWK6M3Z8Y="
 					},
-					"name": "Team",
+					"name": "server.Team",
 					"ownedElements": [
 						{
 							"_type": "UMLAssociation",
@@ -9393,7 +9393,7 @@
 							"visibility": "private",
 							"isStatic": false,
 							"isLeaf": false,
-							"type": "Player",
+							"type": "server.Player",
 							"isReadOnly": false,
 							"isOrdered": false,
 							"isUnique": false,
@@ -9411,7 +9411,7 @@
 							"visibility": "private",
 							"isStatic": false,
 							"isLeaf": false,
-							"type": "Player",
+							"type": "server.Player",
 							"isReadOnly": false,
 							"isOrdered": false,
 							"isUnique": false,
@@ -9606,7 +9606,7 @@
 									"visibility": "public",
 									"isStatic": false,
 									"isLeaf": false,
-									"type": "Player",
+									"type": "server.Player",
 									"isReadOnly": false,
 									"isOrdered": false,
 									"isUnique": false,
@@ -9637,7 +9637,7 @@
 									"visibility": "public",
 									"isStatic": false,
 									"isLeaf": false,
-									"type": "Player",
+									"type": "server.Player",
 									"isReadOnly": false,
 									"isOrdered": false,
 									"isUnique": false,
@@ -9696,7 +9696,7 @@
 									"_parent": {
 										"$ref": "AAAAAAFfDPG3LHqVZW4="
 									},
-									"name": "Player",
+									"name": "server.Player",
 									"visibility": "public",
 									"isStatic": false,
 									"isLeaf": false,
@@ -9728,7 +9728,7 @@
 									"_parent": {
 										"$ref": "AAAAAAFfDPIF+XscjsY="
 									},
-									"name": "Player",
+									"name": "server.Player",
 									"visibility": "public",
 									"isStatic": false,
 									"isLeaf": false,
@@ -9749,7 +9749,7 @@
 							"_parent": {
 								"$ref": "AAAAAAFfDGXfNRzXEzE="
 							},
-							"name": "Team",
+							"name": "server.Team",
 							"visibility": "public",
 							"isStatic": false,
 							"isLeaf": false,
@@ -9769,7 +9769,7 @@
 					"_parent": {
 						"$ref": "AAAAAAFF+qBWK6M3Z8Y="
 					},
-					"name": "Player",
+					"name": "server.Player",
 					"ownedElements": [
 						{
 							"_type": "UMLAssociation",
@@ -9882,7 +9882,7 @@
 							"_parent": {
 								"$ref": "AAAAAAFfDGm4lx11adY="
 							},
-							"name": "Player",
+							"name": "server.Player",
 							"visibility": "public",
 							"isStatic": false,
 							"isLeaf": false,
@@ -10001,7 +10001,7 @@
 					"_parent": {
 						"$ref": "AAAAAAFF+qBWK6M3Z8Y="
 					},
-					"name": "Table",
+					"name": "server.Table",
 					"visibility": "public",
 					"attributes": [
 						{
@@ -10014,7 +10014,7 @@
 							"visibility": "private",
 							"isStatic": false,
 							"isLeaf": false,
-							"type": "CardFamily",
+							"type": "server.CardFamily",
 							"isReadOnly": false,
 							"isOrdered": false,
 							"isUnique": false,
@@ -10053,7 +10053,7 @@
 							"visibility": "private",
 							"isStatic": false,
 							"isLeaf": false,
-							"type": "Card",
+							"type": "server.Card",
 							"multiplicity": "4",
 							"isReadOnly": false,
 							"isOrdered": false,
@@ -10072,7 +10072,7 @@
 							"visibility": "private",
 							"isStatic": false,
 							"isLeaf": false,
-							"type": "Card",
+							"type": "server.Card",
 							"isReadOnly": false,
 							"isOrdered": false,
 							"isUnique": false,
@@ -10110,7 +10110,7 @@
 							"visibility": "private",
 							"isStatic": false,
 							"isLeaf": false,
-							"type": "GameState",
+							"type": "server.GameState",
 							"isReadOnly": false,
 							"isOrdered": false,
 							"isUnique": false,
@@ -10140,7 +10140,7 @@
 									"visibility": "public",
 									"isStatic": false,
 									"isLeaf": false,
-									"type": "CardFamily",
+									"type": "server.CardFamily",
 									"isReadOnly": false,
 									"isOrdered": false,
 									"isUnique": false,
@@ -10203,7 +10203,7 @@
 									"visibility": "public",
 									"isStatic": false,
 									"isLeaf": false,
-									"type": "Card",
+									"type": "server.Card",
 									"multiplicity": "4",
 									"isReadOnly": false,
 									"isOrdered": false,
@@ -10235,7 +10235,7 @@
 									"visibility": "public",
 									"isStatic": false,
 									"isLeaf": false,
-									"type": "Card",
+									"type": "server.Card",
 									"isReadOnly": false,
 									"isOrdered": false,
 									"isUnique": false,
@@ -10359,7 +10359,7 @@
 									"_parent": {
 										"$ref": "AAAAAAFfDKKa0l9nFgA="
 									},
-									"name": "Card",
+									"name": "server.Card",
 									"visibility": "public",
 									"isStatic": false,
 									"isLeaf": false,
@@ -10395,7 +10395,7 @@
 							"_parent": {
 								"$ref": "AAAAAAFfDGy+iB35QXE="
 							},
-							"name": "Table",
+							"name": "server.Table",
 							"visibility": "public",
 							"isStatic": false,
 							"isLeaf": false,
@@ -10415,7 +10415,7 @@
 					"_parent": {
 						"$ref": "AAAAAAFF+qBWK6M3Z8Y="
 					},
-					"name": "GameState",
+					"name": "server.GameState",
 					"visibility": "public",
 					"isAbstract": false,
 					"isFinalSpecialization": false,
@@ -10592,7 +10592,7 @@
 					"_parent": {
 						"$ref": "AAAAAAFF+qBWK6M3Z8Y="
 					},
-					"name": "Server",
+					"name": "server.Server",
 					"ownedElements": [
 						{
 							"_type": "UMLAssociation",
@@ -10784,7 +10784,7 @@
 					"_parent": {
 						"$ref": "AAAAAAFF+qBWK6M3Z8Y="
 					},
-					"name": "DiscardServer",
+					"name": "server.DiscardServer",
 					"visibility": "public",
 					"isAbstract": false,
 					"isFinalSpecialization": false,
@@ -10797,7 +10797,7 @@
 					"_parent": {
 						"$ref": "AAAAAAFF+qBWK6M3Z8Y="
 					},
-					"name": "Command",
+					"name": "server.Command",
 					"ownedElements": [
 						{
 							"_type": "UMLAssociation",
@@ -10912,7 +10912,7 @@
 							"_parent": {
 								"$ref": "AAAAAAFfDHwK8i479VI="
 							},
-							"name": "Command",
+							"name": "server.Command",
 							"visibility": "public",
 							"isStatic": false,
 							"isLeaf": false,
@@ -10944,7 +10944,7 @@
 							"_parent": {
 								"$ref": "AAAAAAFfDHwK8i479VI="
 							},
-							"name": "Command",
+							"name": "server.Command",
 							"visibility": "public",
 							"isStatic": false,
 							"isLeaf": false,
@@ -11045,7 +11045,7 @@
 					"_parent": {
 						"$ref": "AAAAAAFF+qBWK6M3Z8Y="
 					},
-					"name": "Serializer",
+					"name": "server.Serializer",
 					"visibility": "public",
 					"attributes": [
 						{
@@ -11093,7 +11093,7 @@
 							"_parent": {
 								"$ref": "AAAAAAFfDIZfOzEug4I="
 							},
-							"name": "Serializer",
+							"name": "server.Serializer",
 							"visibility": "public",
 							"isStatic": false,
 							"isLeaf": false,
@@ -11125,7 +11125,7 @@
 							"_parent": {
 								"$ref": "AAAAAAFfDIZfOzEug4I="
 							},
-							"name": "Serializer",
+							"name": "server.Serializer",
 							"visibility": "public",
 							"isStatic": false,
 							"isLeaf": false,
@@ -11441,7 +11441,7 @@
 					"_parent": {
 						"$ref": "AAAAAAFF+qBWK6M3Z8Y="
 					},
-					"name": "Card",
+					"name": "server.Card",
 					"ownedElements": [
 						{
 							"_type": "UMLAssociation",
@@ -11501,7 +11501,7 @@
 							"visibility": "private",
 							"isStatic": false,
 							"isLeaf": false,
-							"type": "CardFamily",
+							"type": "server.CardFamily",
 							"isReadOnly": false,
 							"isOrdered": false,
 							"isUnique": false,
@@ -11519,7 +11519,7 @@
 							"visibility": "private",
 							"isStatic": false,
 							"isLeaf": false,
-							"type": "CardName",
+							"type": "server.CardName",
 							"isReadOnly": false,
 							"isOrdered": false,
 							"isUnique": false,
@@ -11535,7 +11535,7 @@
 							"_parent": {
 								"$ref": "AAAAAAFfDKYer2AUFMs="
 							},
-							"name": "Card",
+							"name": "server.Card",
 							"visibility": "public",
 							"isStatic": false,
 							"isLeaf": false,
@@ -11546,7 +11546,7 @@
 									"_parent": {
 										"$ref": "AAAAAAFfDKbPCmMfYTk="
 									},
-									"name": "CardFamily",
+									"name": "server.CardFamily",
 									"visibility": "public",
 									"isStatic": false,
 									"isLeaf": false,
@@ -11562,7 +11562,7 @@
 									"_parent": {
 										"$ref": "AAAAAAFfDKbPCmMfYTk="
 									},
-									"name": "CardName",
+									"name": "server.CardName",
 									"visibility": "public",
 									"isStatic": false,
 									"isLeaf": false,
@@ -11597,7 +11597,7 @@
 									"visibility": "public",
 									"isStatic": false,
 									"isLeaf": false,
-									"type": "CardName",
+									"type": "server.CardName",
 									"isReadOnly": false,
 									"isOrdered": false,
 									"isUnique": false,
@@ -11628,7 +11628,7 @@
 									"visibility": "public",
 									"isStatic": false,
 									"isLeaf": false,
-									"type": "CardFamily",
+									"type": "server.CardFamily",
 									"isReadOnly": false,
 									"isOrdered": false,
 									"isUnique": false,
@@ -11687,7 +11687,7 @@
 					"_parent": {
 						"$ref": "AAAAAAFF+qBWK6M3Z8Y="
 					},
-					"name": "DiscardServerHandler",
+					"name": "server.DiscardServerHandler",
 					"visibility": "public",
 					"isAbstract": false,
 					"isFinalSpecialization": false,

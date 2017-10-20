@@ -25,17 +25,38 @@ dependencies {
     /* END LIB */
 }
 
-jar {
+task copyFiles(type: Copy) {
+    from 'save'
+    into 'build/libs'
+}
 
-    baseName = 'JavaWinApp'
+task serverJar(type: Jar) {
+
+    baseName = 'jCoincheServer'
     from files(sourceSets.main.output.classesDir)
     from files(sourceSets.main.output.resourcesDir)
     from { configurations.compile.collect { zipTree(it) } }
 
     manifest {
-        attributes 'Implementation-Title': 'JavaWinApp'
+        attributes 'Implementation-Title': 'jCoincheServer'
         attributes 'Implementation-Version': version
-        attributes 'Main-Class': 'Server'
+        attributes 'Main-Class': 'server.Server'
+    }
+
+}
+
+task clientJar(type: Jar) {
+
+    baseName = 'jCoincheClient'
+    from files(sourceSets.main.output.classesDir)
+    from files(sourceSets.main.output.resourcesDir)
+    from { configurations.compile.collect { zipTree(it) } }
+
+    manifest {
+        attributes 'Implementation-Title': 'jCoincheClient'
+        attributes 'Implementation-Version': version
+        attributes 'Main-Class': 'client.Client'
     }
 }
+
 
